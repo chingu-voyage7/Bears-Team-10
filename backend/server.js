@@ -5,6 +5,8 @@ const Cors = require('@koa/cors')
 const BodyParser = require('koa-bodyparser')
 const Helmet = require('koa-helmet')
 const respond = require('koa-respond')
+const db = require('./config/db')
+const passport = require('koa-passport')
 
 const app = new Koa()
 const router = new Router()
@@ -26,6 +28,11 @@ app.use(BodyParser({
 }))
 
 app.use(respond())
+
+//AUTH Test
+app.use(passport.initialize())
+app.use(passport.session())
+db.query('SELECT * FROM "public"."employee" LIMIT 100', [], (err, res) => console.log(res.rows))
 
 // API routes
 require('./routes')(router)
