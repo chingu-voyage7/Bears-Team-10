@@ -8,10 +8,10 @@ import App from '../App';
 //   ReactDOM.render(<App />, div);
 //   ReactDOM.unmountComponentAtNode(div);
 // });
-
-  describe('app component', () => {
-    it('contains a header with the "Hello"', () => {
-      const app = shallow(<App/>);
-      expect(app.containsMatchingElement(<h1>Hello</h1>)).toEqual(true);
-    });
-  });
+  // 
+  // describe('app component', () => {
+  //   it('contains a header with the "Hello"', () => {
+  //     const app = shallow(<App/>);
+  //     expect(app.containsMatchingElement(<h1>Hello</h1>)).toEqual(true);
+  //   });
+  // });
