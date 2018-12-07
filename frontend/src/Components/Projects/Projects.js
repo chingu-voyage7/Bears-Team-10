@@ -38,6 +38,7 @@ class Projects extends React.Component {
                       id={this.props.posts[i].id}
                       name={this.props.posts[i].name}
                       message={this.props.posts[i].message}
+                      date={this.props.posts[i].date}
                     />
                   );
                 })
