@@ -4,6 +4,9 @@
   "private": true,
   "dependencies": {
     "antd": "^3.11.0",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.7.0",
+    "jest-enzyme": "^7.0.1",
     "koa-static": "^5.0.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
