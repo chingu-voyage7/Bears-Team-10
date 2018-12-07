@@ -4,12 +4,12 @@ import "./CommunityProjects.css"
 
 const CommunityProjects = ({ projectList, posts }) => {
   return (
-    <div class="contentContainer">
-      <div class = "contentAndTitles" >
-        <div class="projectsTitle">
+    <div className="contentContainer">
+      <div className = "contentAndTitles" >
+        <div className="projectsTitle">
           <span > Project List </span>
         </div>
-        <div class="projectList" > {
+        <div className="projectList" > {
           projectList.map((project, i) => {
             return (
               <Projects key={i}

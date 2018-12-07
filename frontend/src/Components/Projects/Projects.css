@@ -6,8 +6,8 @@
 	margin-bottom: 2vw;
   transition: opacity .2s ease-in-out;
 
-  display: flex;
-  flex-direction: row;
+  /* display: flex; */
+  /* flex-direction: row; */
   align-items: center;
   justify-content: baseline;
 
