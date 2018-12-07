@@ -40,8 +40,7 @@ class Header extends Component {
           <h1 className="header-title">Bairs</h1>
         </div>
         <p>
-          Welcome,{' '}
-          {user && user.loggedIn ? <span>{user.name}!</span> : 'please sign in'}
+          Welcome, {user && user.loggedIn ? `${user.name}!` : 'please sign in'}
         </p>
         {/* dropdown */}
         <Dropdown overlay={menu} trigger={['click']}>
