@@ -2,7 +2,7 @@ import React from 'react';
 import Projects from '../Projects/Projects';
 import "./CommunityProjects.css"
 
-const CommunityProjects = ({ projectList }) => {
+const CommunityProjects = ({ projectList, posts }) => {
   return (
     <div class="contentContainer">
       <div class = "contentAndTitles" >
@@ -16,6 +16,7 @@ const CommunityProjects = ({ projectList }) => {
                 id={projectList[i].id}
                 title={projectList[i].title}
                 desc={projectList[i].desc}
+                posts={posts}
               />
             );
           })
