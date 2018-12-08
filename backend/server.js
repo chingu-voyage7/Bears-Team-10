@@ -5,6 +5,7 @@ const Cors = require('@koa/cors')
 const BodyParser = require('koa-bodyparser')
 const Helmet = require('koa-helmet')
 const respond = require('koa-respond')
+const session = require('koa-session')
 const db = require('./config/db')
 const passport = require('koa-passport')
 
@@ -18,21 +19,20 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(Cors())
-app.use(BodyParser({
-  enableTypes: ['json'],
-  jsonLimit: '5mb',
-  strict: true,
-  onerror: function (err, ctx) {
-    ctx.throw('body parse error', 422)
-  }
-}))
+
+// sessions
+app.keys = ['secret-key'] //TODO: Change later to env keys
+app.use(session(app))
+
+app.use(BodyParser())
 
 app.use(respond())
 
-//AUTH Test
+//AUTH setup
+require('./config/passport')
 app.use(passport.initialize())
 app.use(passport.session())
-db.query('SELECT * FROM "public"."employee" LIMIT 100', [], (err, res) => console.log(res.rows))
+// db.query('SELECT * FROM "public"."employee" LIMIT 100', [], (err, res) => console.log(res.rows))
 
 // API routes
 require('./routes')(router)
