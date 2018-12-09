@@ -12,6 +12,7 @@ const passport = require('koa-passport')
 const app = new Koa()
 const router = new Router()
 
+app.proxy = true
 app.use(Helmet())
 
 if (process.env.NODE_ENV === 'development') {
@@ -21,18 +22,16 @@ if (process.env.NODE_ENV === 'development') {
 app.use(Cors())
 
 // sessions
-app.keys = ['secret-key'] //TODO: Change later to env keys
-app.use(session(app))
+app.keys = [process.env.SECRET_SESSION_KEY]
+app.use(session({}, app))
 
 app.use(BodyParser())
-
 app.use(respond())
 
 //AUTH setup
 require('./config/passport')
 app.use(passport.initialize())
 app.use(passport.session())
-// db.query('SELECT * FROM "public"."employee" LIMIT 100', [], (err, res) => console.log(res.rows))
 
 // API routes
 require('./routes')(router)

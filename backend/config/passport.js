@@ -1,7 +1,7 @@
 const passport = require('koa-passport')
 const db = require('./db')
 const bcrypt = require('bcrypt')
-const LocalStrategy = require('passport-local')
+const LocalStrategy = require('passport-local').Strategy
 
 passport.serializeUser((user, done) => { done(null, user.id); })
 
@@ -12,9 +12,7 @@ passport.deserializeUser((id, done) => {
 })
 
 passport.use(new LocalStrategy((username, password, done) => {
-  console.log('username', username)
   db.query('SELECT id, username, password FROM users WHERE username=$1', [username], (err, result) => {
-    console.log(err, result)
     if (err) { return done(err) }
     if (result.rows.length > 0) {
       const first = result.rows[0]
