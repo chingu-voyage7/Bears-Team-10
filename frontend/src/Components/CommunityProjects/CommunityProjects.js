@@ -6,7 +6,7 @@ import "./CommunityProjects.css"
 
 // Presumably after login the screen will include the list of projects, which when clicked on will open up the posts for that project including a textarea box for submitting a new post. I have not yet done the functionality for saving a post. I assume we want to store info on who made the post and when. Right now I just have a date but again I assume we will want date and time.
 
-const CommunityProjects = ({ projectList, posts }) => {
+const CommunityProjects = ({ projectList, onRouteChange }) => {
   return (
     <div className="contentContainer">
       <div className = "contentAndTitles" >
@@ -20,7 +20,7 @@ const CommunityProjects = ({ projectList, posts }) => {
                 id={projectList[i].id}
                 title={projectList[i].title}
                 desc={projectList[i].desc}
-                posts={posts}
+                onRouteChange={onRouteChange}
               />
             );
           })

@@ -1,25 +1,56 @@
 import React, { Component } from 'react';
 import './App.css';
 import CommunityProjects from './Components/CommunityProjects/CommunityProjects';
+import CommunityPosts from './Components/CommunityPosts/CommunityPosts';
 import { projectList } from './projectList';
 import { posts } from './posts';
 import Header from './Components/Header/Header';
 
-
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      route: 'home',
+      user: '',
+      projectList: projectList,
+      posts: posts,
+    }
+  }
+
+  onRouteChange = (route, index) => {
+    if (route === 'home') {
+      this.setState({ route: 'home' })
+    } else if (route === 'posts') {
+      this.setState({ route: route, index: index });
+    }
+  }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <Header />
         </header>
-        <CommunityProjects
-          projectList={projectList}
-          posts={posts}
-        />
-        <p>
-          Chingu Voyage-7 Bears Team 10 lets build something Awesome!
-          </p>
+        {
+          this.state.route === 'home'
+          ? <CommunityProjects
+              projectList={projectList}
+              posts={posts}
+              onRouteChange={this.onRouteChange}
+            />
+          : (
+            this.state.route === 'posts'
+            ? <CommunityPosts
+              projectList={projectList}
+              posts={posts}
+              onRouteChange={this.onRouteChange}
+              index={this.index}
+              
+              />
+            : null
+          )
+
+        }
       </div>
     );
   }

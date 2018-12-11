@@ -1,52 +1,32 @@
 import React from 'react';
 import "./Projects.css";
-import ProjectPosts from "../ProjectPosts/ProjectPosts";
-import NewPost from "../NewPost/NewPost";
+// import CommunityPosts from '../CommunityPost/CommunityPosts';
 
 class Projects extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      postsVisible: false
+  constructor(props) {
+    super(props);
+    this.onClickPosts = this.onClickPosts.bind(this);
     }
-  }
+  
 
-  onClick() {
-    this.setState(prevState => ({ postsVisible: !prevState.postsVisible }));
+    onClickPosts() {
+    var index = parseInt(this.props.index, 10);
+    this.props.onRouteChange('posts', index)
   }
-
+ 
   render() {
 
     return (
       <div className="project">
-        <div className="projectText" onClick={() => this.onClick()}>
+        <div className="projectText" onClick={ this.onClickPosts }>
           <div className="projectTitle" >
             <span > {this.props.title} </span>
           </div>
           <div className="projectDescription" >
             <span > {this.props.desc} </span>
           </div>
-          Click to show /hide posts
-        </div>
-        {
-          this.state.postsVisible
-            ? <div className="postList" >
-              {
-                this.props.posts.map((post, i) => {
-                  return (
-                    <ProjectPosts key={i}
-                      id={this.props.posts[i].id}
-                      name={this.props.posts[i].name}
-                      message={this.props.posts[i].message}
-                      date={this.props.posts[i].date}
-                    />
-                  );
-                })
-              }
-              <NewPost />
-            </div>
-            : null
-        }
+          Click to show posts
+          </div>
       </div>
     );
   }
