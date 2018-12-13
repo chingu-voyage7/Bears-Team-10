@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+import Header from './Components/Header/Header';
+
 import './App.css';
 import CommunityProjects from './Components/CommunityProjects/CommunityProjects';
 import CommunityPosts from './Components/CommunityPosts/CommunityPosts';
@@ -28,9 +31,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <Header />
-        </header>
+
+        <Header />
+
         {
           this.state.route === 'home'
           ? <CommunityProjects
@@ -51,6 +54,7 @@ class App extends Component {
           )
 
         }
+
       </div>
     );
   }
