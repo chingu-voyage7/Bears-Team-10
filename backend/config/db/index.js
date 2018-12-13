@@ -19,9 +19,9 @@ const queries = {
     ]);
     return result.rows[0];
   },
-  getUserProfile: async username => {
-    const result = await pool.query("SELECT * FROM USERS WHERE username=$1", [
-      username
+  getUserProfile: async userId => {
+    const result = await pool.query("SELECT * FROM USERS WHERE id=$1;", [
+      userId
     ]);
     return result.rows[0];
   },
@@ -35,12 +35,18 @@ const queries = {
   ) => {
     const result = await pool.query(
       `UPDATE users SET profile_picture=$1, display_name=$2,
-      bio=$3, interests=$4, github=$5 WHERE id = $6 RETURNING *;`,
+      bio=$3, interests=$4, github=$5 WHERE id=$6 RETURNING *;`,
       [profile_picture, display_name, bio, interests, github, id]
     );
     console.log(result);
     console.log(display_name);
     return result.rows[0];
+  },
+  deleteUserById: async userId => {
+    console.log(`Ill delete this user: ${userId}`);
+    // const result = await pool.query(
+    //   "DELETE users WHERE userId=$1;"
+    // )
   }
 };
 
