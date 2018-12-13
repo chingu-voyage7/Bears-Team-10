@@ -19,6 +19,12 @@ const queries = {
     ]);
     return result.rows[0];
   },
+  getUserProfile: async username => {
+    const result = await pool.query("SELECT * FROM USERS WHERE username=$1", [
+      username
+    ]);
+    return result.rows[0];
+  },
   updateUserProfile: async (
     profile_picture,
     display_name,

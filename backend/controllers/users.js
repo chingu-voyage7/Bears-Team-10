@@ -8,6 +8,16 @@ async function hello(ctx) {
   });
 }
 
+async function getUser(ctx) {
+  let user = ctx.state.user.username;
+  console.log(user);
+  const currentUser = await db.getUserProfile(user);
+  console.log(currentUser);
+  ctx.send(200, {
+    currentUser
+  });
+}
+
 async function updateUserProfile(ctx) {
   const updatedUser = await db.updateUserProfile(
     ctx.request.body.profile_picture,
@@ -26,5 +36,6 @@ async function updateUserProfile(ctx) {
 
 module.exports = {
   hello,
+  getUser,
   updateUserProfile
 };
