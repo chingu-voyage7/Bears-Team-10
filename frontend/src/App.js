@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-
 import Header from './Components/Header/Header';
-
 import './App.css';
 import CommunityProjects from './Components/CommunityProjects/CommunityProjects';
 import CommunityPosts from './Components/CommunityPosts/CommunityPosts';
 import { projectList } from './projectList';
 import { posts } from './posts';
-import Header from './Components/Header/Header';
 
 class App extends Component {
   constructor() {
