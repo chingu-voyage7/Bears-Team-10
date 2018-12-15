@@ -1,26 +1,32 @@
-
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { FaPaw } from 'react-icons/fa';
-import { FaSignOutAlt } from 'react-icons/fa';
-import { FaSignInAlt } from 'react-icons/fa';
-import { Dropdown, Menu, Icon } from 'antd';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { FaPaw } from 'react-icons/fa'
+import { FaSignOutAlt } from 'react-icons/fa'
+import { FaSignInAlt } from 'react-icons/fa'
+import { Dropdown, Menu, Icon } from 'antd'
+import { fetchUser } from '../../redux/auth'
+import { connect } from 'react-redux'
 
 class Header extends Component {
   constructor(props) {
-    super(props);
+    super(props)
   }
+
+  componentDidMount() {
+    this.props.fetchUser()
+  }
+
   render() {
-    const { user } = this.props;
+    const { user } = this.props
 
     const onClick = ({ key }) => {
       // message.info(`Click on item ${key}`);
-    };
+    }
 
     const menu = (
       <Menu>
         <Menu.Item key="1">
-          {user && user.loggedIn ? (
+          {user && user.isLoggedIn ? (
             <FaSignOutAlt
               title="logout"
               onClick={() => console.log('leaving')}
@@ -32,7 +38,7 @@ class Header extends Component {
         <Menu.Item key="2">2nd menu item</Menu.Item>
         <Menu.Item key="3">3rd menu item</Menu.Item>
       </Menu>
-    );
+    )
 
     return (
       <div className="header-div">
@@ -41,7 +47,8 @@ class Header extends Component {
           <h1 className="header-title">Bairs</h1>
         </div>
         <p>
-          Welcome, {user && user.loggedIn ? `${user.name}!` : 'please sign in'}
+          Welcome,{' '}
+          {user && user.isLoggedIn ? `${user.name}!` : 'please sign in'}
         </p>
         {/* dropdown */}
         <Dropdown overlay={menu} trigger={['click']}>
@@ -50,19 +57,17 @@ class Header extends Component {
           </a>
         </Dropdown>
       </div>
-    );
+    )
   }
 }
 
-import React from 'react';
-import PropTypes from 'prop-types';
+function mapStateToProps(state) {
+  return {
+    user: state.auth.user
+  }
+}
 
-const Header = () => (
-  <div>
-    <h1>Bairs</h1>
-    <p>Welcome!</p>
-  </div>
-);
-
-
-export default Header;
+export default connect(
+  mapStateToProps,
+  { fetchUser }
+)(Header)
