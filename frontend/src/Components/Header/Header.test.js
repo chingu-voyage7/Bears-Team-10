@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { shallow, mount } from 'enzyme';
 import Header from './Header';
 import { FaPaw } from 'react-icons/fa';
@@ -33,4 +34,14 @@ describe('Header component', () => {
     const container = mount(<Header user={props} />);
     expect(container.text()).toContain('Carl');
   });
+
+import ReactDOM from 'react-dom';
+import Header from './Header';
+
+test('can render the logo', () => {
+  const container = document.createElement('div');
+  ReactDOM.render(<Header />, container);
+
+  expect(container.textContent).toContain('Bairs');
+
 });

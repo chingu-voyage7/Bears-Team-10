@@ -1,20 +1,19 @@
-const db = require("../config/db");
-const uuid_v4 = require("uuid/v4");
-const bcrypt = require("bcrypt");
-const passport = require("koa-passport");
+const db = require('../config/db')
+const uuid_v4 = require('uuid/v4')
+const bcrypt = require('bcrypt')
+const passport = require('koa-passport')
 
 async function register(ctx) {
   const { username, password } = ctx.request.body;
 
-  const existingUser = await db.findUserByusername(username);
+  const existingUser = await db.findUserByusername(username)
   if (existingUser) {
-    return ctx.badRequest({ error: "username already exists" });
+    return ctx.badRequest({ error: 'username already exists' })
   }
 
-  const salt = bcrypt.genSaltSync();
-  //console.log(salt);
-  const hashedPassword = bcrypt.hashSync(password, salt);
-  const id = uuid_v4();
+  const salt = bcrypt.genSaltSync()
+  const hashedPassword = bcrypt.hashSync(password, salt)
+  const id = uuid_v4()
 
   const registeredUser = await db.addUser(id, username, hashedPassword);
   ctx.login(registeredUser);
@@ -41,10 +40,7 @@ async function logout(ctx) {
 }
 
 async function status(ctx) {
-  ctx.send(200, {
-    isLoggedIn: ctx.isAuthenticated(),
-    user: ctx.state.user
-  });
+  ctx.send(200, { isLoggedIn: ctx.isAuthenticated(), user: ctx.state.user })
 }
 
 async function requireAuth(ctx, next) {
