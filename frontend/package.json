@@ -8,7 +8,14 @@
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "jest-enzyme": "^7.0.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "husky": "^1.2.1",
     "koa-static": "^5.0.0",
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.15.3",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-icons": "^3.2.2",
@@ -19,7 +26,14 @@
     "redux-saga": "^0.16.2",
     "redux-thunk": "^2.3.0"
   },
+  "lint-staged": {
+    "src/**/*.{js,jsx,json,scss,css}": [
+      "prettier --config .prettierrc --write",
+      "git add"
+    ]
+  },
   "scripts": {
+    "precommit": "lint-staged",
     "start": "react-scripts start",
     "build": "rm -rf ./build && react-scripts build && rm -rf ../backend/build && mv ./build ../backend/build",
     "test": "react-scripts test",
@@ -34,5 +48,11 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-react": "^7.11.1",
+    "parser": "^0.1.4",
+    "transform": "^1.1.2"
+  }
 }
