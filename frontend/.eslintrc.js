@@ -27,5 +27,7 @@ module.exports = {
       "settings": {
         "import/parser": "babel-eslint",
       }
+
   }
   
+
