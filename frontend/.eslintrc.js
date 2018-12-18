@@ -1,3 +1,27 @@
 module.exports = {
-    "extends": "standard"
-};
+    'env': {
+      'browser': true,
+      'jest': true,
+      'es6': true,
+      'node': true,
+    },
+    'extends': [
+      'airbnb',
+    ],
+    
+    'rules': {
+      
+    },
+    'parserOptions': {
+      'ecmaFeatures': {
+        'jsx': true,
+      }
+    },
+    "parser": "babel-eslint",
+      "settings": {
+        "import/parser": "babel-eslint",
+      }
+
+  }
+  
+
