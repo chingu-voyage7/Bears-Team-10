@@ -7,16 +7,10 @@ module.exports = {
     },
     'extends': [
       'airbnb',
-      'prettier',
     ],
-    'plugins': [
-      'prettier',
-    ],
+    
     'rules': {
-      'prettier/prettier': ['error', {
-        'singleQuote': true,
-        'trailingComma': 'es5'
-      }],
+      
     },
     'parserOptions': {
       'ecmaFeatures': {
