@@ -61,6 +61,7 @@ class Header extends Component {
   }
 }
 
+
 function mapStateToProps(state) {
   return {
     user: state.auth.user
@@ -71,3 +72,4 @@ export default connect(
   mapStateToProps,
   { fetchUser }
 )(Header)
+

@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Header from './Components/Header/Header';
 import './App.css';
 import { fetchUser } from './redux/auth';
-import { connect } from 'react-redux';
-
 
 class App extends Component {
-
   componentDidMount() {
-    this.props.fetchUser()
+    fetchUser();
   }
 
   render() {
@@ -20,4 +18,9 @@ class App extends Component {
   }
 }
 
-export default connect(null, { fetchUser })(App);
+export default connect(
+  null,
+  { fetchUser }
+
+)(App);
+
