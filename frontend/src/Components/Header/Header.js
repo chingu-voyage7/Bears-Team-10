@@ -1,75 +1,63 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { FaPaw } from 'react-icons/fa'
-import { FaSignOutAlt } from 'react-icons/fa'
-import { FaSignInAlt } from 'react-icons/fa'
-import { Dropdown, Menu, Icon } from 'antd'
-import { fetchUser } from '../../redux/auth'
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { FaPaw } from 'react-icons/fa';
+import { Button } from 'antd';
+import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
+import * as actions from '../../redux/auth';
 
 class Header extends Component {
-  constructor(props) {
-    super(props)
-  }
+  state = {};
 
   componentDidMount() {
-    this.props.fetchUser()
+    this.props.fetchUser();
   }
 
   render() {
-    const { user } = this.props
-
-    const onClick = ({ key }) => {
-      // message.info(`Click on item ${key}`);
-    }
-
-    const menu = (
-      <Menu>
-        <Menu.Item key="1">
-          {user && user.isLoggedIn ? (
-            <FaSignOutAlt
-              title="logout"
-              onClick={() => console.log('leaving')}
-            />
-          ) : (
-            <FaSignInAlt title="login" onClick={() => console.log('here')} />
-          )}
-        </Menu.Item>
-        <Menu.Item key="2">2nd menu item</Menu.Item>
-        <Menu.Item key="3">3rd menu item</Menu.Item>
-      </Menu>
-    )
+    const { user } = this.props;
 
     return (
       <div className="header-div">
         <div className="logo">
           <FaPaw />
-          <h1 className="header-title">Bairs</h1>
+          <Link to="/">
+            <h1 className="header-title">Bairs</h1>
+          </Link>
         </div>
         <p>
-          Welcome,{' '}
-          {user && user.isLoggedIn ? `${user.name}!` : 'please sign in'}
+          <span>Welcome! </span>
+          {user && user.isLoggedIn ? (
+            <span>
+              {user.user.username}
+              <Button
+                className=""
+                href="#"
+                onClick={async e => {
+                  e.preventDefault();
+                  this.props.logout(() => this.props.history.push('/'));
+                }}
+              >
+                <span> Logout?</span>
+              </Button>
+            </span>
+          ) : (
+            <Link to="/login">Sign In</Link>
+          )}
         </p>
-        {/* dropdown */}
-        <Dropdown overlay={menu} trigger={['click']}>
-          <a className="ant-dropdown-link" href="#">
-            Hover me, Click menu item <Icon type="down" />
-          </a>
-        </Dropdown>
       </div>
-    )
+    );
   }
 }
-
 
 function mapStateToProps(state) {
   return {
-    user: state.auth.user
-  }
+    user: state.auth.user,
+  };
 }
 
-export default connect(
-  mapStateToProps,
-  { fetchUser }
-)(Header)
-
+export default withRouter(
+  connect(
+    mapStateToProps,
+    actions
+  )(Header)
+);
