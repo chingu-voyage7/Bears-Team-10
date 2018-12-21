@@ -17,14 +17,14 @@ async function register(ctx) {
 
   const registeredUser = await db.addUser(id, username, hashedPassword);
   ctx.login(registeredUser);
-  ctx.send(201, "Registered Successfully");
+  ctx.send(200, "Registered Successfully");
 }
 
 async function login(ctx) {
   return passport.authenticate("local", (err, user, info, status) => {
     if (user) {
       ctx.login(user);
-      ctx.send(202, "Login Successful");
+      ctx.send(200, "Login Successful");
     } else {
       ctx.send(400, "Login Failed");
     }
@@ -34,9 +34,9 @@ async function login(ctx) {
 async function logout(ctx) {
   if (ctx.isAuthenticated()) {
     ctx.logout();
-    return ctx.send(201, "Logged Out");
+    return ctx.send(200, "Logged Out");
   }
-  return ctx.send(201, "Already logged out");
+  return ctx.send(200, "Already logged out");
 }
 
 async function status(ctx) {
