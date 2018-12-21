@@ -15,15 +15,19 @@ export const register = (
   password,
   redirectOnSuccess
 ) => async dispatch => {
-  const res = await axios('/api/auth/register', {
-    method: 'post',
-    data: { username, password },
-    withCredentials: true,
-  });
-  if (res.status === 200) {
-    const user = await axios.get('/api/auth/status');
-    dispatch({ type: FETCH_USER, value: user.data });
-    redirectOnSuccess();
+  try {
+    const res = await axios('/api/auth/register', {
+      method: 'post',
+      data: { username, password },
+      withCredentials: true,
+    });
+    if (res.status === 200) {
+      const user = await axios.get('/api/auth/status');
+      dispatch({ type: FETCH_USER, value: user.data });
+      redirectOnSuccess();
+    }
+  } catch (error) {
+    console.log(error.response.data);
   }
 };
 
@@ -32,24 +36,32 @@ export const login = (
   password,
   redirectOnSuccess
 ) => async dispatch => {
-  const res = await axios('/api/auth/login', {
-    method: 'post',
-    data: { username, password },
-    withCredentials: true,
-  });
-  if (res.status === 200) {
-    const user = await axios.get('/api/auth/status');
-    dispatch({ type: FETCH_USER, value: user.data });
-    redirectOnSuccess();
+  try {
+    const res = await axios('/api/auth/login', {
+      method: 'post',
+      data: { username, password },
+      withCredentials: true,
+    });
+    if (res.status === 200) {
+      const user = await axios.get('/api/auth/status');
+      dispatch({ type: FETCH_USER, value: user.data });
+      redirectOnSuccess();
+    }
+  } catch (error) {
+    console.log(error.response.data);
   }
 };
 
 export const logout = redirectOnSuccess => async dispatch => {
-  const res = await axios.get('/api/auth/logout');
-  if (res.status === 200) {
-    const user = await axios.get('/api/auth/status');
-    dispatch({ type: FETCH_USER, value: user.data });
-    redirectOnSuccess();
+  try {
+    const res = await axios.get('/api/auth/logout');
+    if (res.status === 200) {
+      const user = await axios.get('/api/auth/status');
+      dispatch({ type: FETCH_USER, value: user.data });
+      redirectOnSuccess();
+    }
+  } catch (error) {
+    console.log(error.response.data);
   }
 };
 
