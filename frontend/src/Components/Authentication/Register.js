@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Form, Input, Icon, Button } from 'antd';
-import * as actions from '../../redux/auth';
+import { register } from '../../redux/auth';
+import { fetchProjects } from '../../redux/projects';
 import './auth.css';
 
 const { Item: FormItem } = Form;
@@ -10,12 +11,12 @@ const { Item: FormItem } = Form;
 class Register extends Component {
   handleSubmit = async e => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    this.props.form.validateFields(async (err, values) => {
       if (!err) {
         const { username, password } = values;
-        this.props.register(username, password, () =>
-          this.props.history.push('/')
-        );
+        await this.props.register(username, password);
+        this.props.fetchProjects();
+        this.props.history.push('/');
       }
     });
   };
@@ -76,6 +77,6 @@ const WrappedRegisterForm = Form.create()(Register);
 export default withRouter(
   connect(
     null,
-    actions
+    { register, fetchProjects }
   )(WrappedRegisterForm)
 );

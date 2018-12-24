@@ -2,30 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { Form, Input, Icon, Button } from 'antd';
-import * as actions from '../../redux/auth';
+import { login } from '../../redux/auth';
+import { fetchProjects } from '../../redux/projects';
 import './auth.css';
 
 const { Item: FormItem } = Form;
 
 class Login extends Component {
-  state = {
-    username: '',
-    password: '',
-  };
-
   handleSubmit = async e => {
     e.preventDefault();
-    this.props.login(this.state.username, this.state.password, () =>
-      this.props.history.push('/')
-    );
-  };
-
-  handleChange = e => {
-    const { id: fieldName, value: fieldValue } = e.target;
-    this.setState({ [fieldName]: fieldValue }, () => {
-      this.props.form.setFieldsValue({
-        [fieldName]: fieldValue,
-      });
+    this.props.form.validateFields(async (err, values) => {
+      if (!err) {
+        const { username, password } = values;
+        await this.props.login(username, password);
+        this.props.fetchProjects();
+        this.props.history.push('/');
+      }
     });
   };
 
@@ -78,5 +70,5 @@ const WrappedLoginForm = withRouter(Form.create()(Login));
 
 export default connect(
   null,
-  actions
+  { login, fetchProjects }
 )(WrappedLoginForm);
