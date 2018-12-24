@@ -1,20 +1,22 @@
 import thunkMiddleware from 'redux-thunk';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import { createLogger } from 'redux-logger';
 import auth from './auth';
+import projects from './projects';
 
 const loggerMiddleware = createLogger();
 
-const createStoreWithMiddleware = applyMiddleware(
-  thunkMiddleware,
-  loggerMiddleware
-)(createStore);
-
 const reducer = combineReducers({
   auth,
+  projects,
 });
 
-const configureStore = initialState =>
-  createStoreWithMiddleware(reducer, initialState);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export default configureStore;
+const store = createStore(
+  reducer,
+  {},
+  composeEnhancers(applyMiddleware(thunkMiddleware, loggerMiddleware))
+);
+
+export default store;
