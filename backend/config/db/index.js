@@ -35,7 +35,25 @@ const queries = {
     console.log(result);
     console.log(display_name);
     return result.rows[0];
-  }
+  },
+  createProject: async (
+    project_id,
+    project_owner_user_id,
+    project_title,
+    project_description,
+    creation_timestamp
+  ) => {
+    const result = await pool.query(
+      "INSERT INTO PROJECTS VALUES ($1, $2, $3, $4, $5) RETURNING *",
+      [project_id, project_owner_user_id, project_title, project_description, creation_timestamp]
+    );
+    console.log(result);
+    return result.rows[0];
+  },
+  fetchProjects: async () => {
+    const result = await pool.query("SELECT * FROM PROJECTS");
+    return result.rows;
+  },
 };
 
 module.exports = {

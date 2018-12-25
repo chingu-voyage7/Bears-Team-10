@@ -7,14 +7,13 @@ const initialState = {
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get('/api/auth/status');
-  dispatch({ type: FETCH_USER, value: res.data });
+  return new Promise((resolve, _reject) => {
+    dispatch({ type: FETCH_USER, value: res.data });
+    resolve();
+  });
 };
 
-export const register = (
-  username,
-  password,
-  redirectOnSuccess
-) => async dispatch => {
+export const register = (username, password) => async dispatch => {
   try {
     const res = await axios('/api/auth/register', {
       method: 'post',
@@ -23,19 +22,17 @@ export const register = (
     });
     if (res.status === 200) {
       const user = await axios.get('/api/auth/status');
-      dispatch({ type: FETCH_USER, value: user.data });
-      redirectOnSuccess();
+      return new Promise((resolve, _reject) => {
+        dispatch({ type: FETCH_USER, value: user.data });
+        resolve();
+      });
     }
   } catch (error) {
     console.log(error.response.data);
   }
 };
 
-export const login = (
-  username,
-  password,
-  redirectOnSuccess
-) => async dispatch => {
+export const login = (username, password) => async dispatch => {
   try {
     const res = await axios('/api/auth/login', {
       method: 'post',
@@ -44,21 +41,25 @@ export const login = (
     });
     if (res.status === 200) {
       const user = await axios.get('/api/auth/status');
-      dispatch({ type: FETCH_USER, value: user.data });
-      redirectOnSuccess();
+      return new Promise((resolve, _reject) => {
+        dispatch({ type: FETCH_USER, value: user.data });
+        resolve();
+      });
     }
   } catch (error) {
     console.log(error.response.data);
   }
 };
 
-export const logout = redirectOnSuccess => async dispatch => {
+export const logout = () => async dispatch => {
   try {
     const res = await axios.get('/api/auth/logout');
     if (res.status === 200) {
       const user = await axios.get('/api/auth/status');
-      dispatch({ type: FETCH_USER, value: user.data });
-      redirectOnSuccess();
+      return new Promise((resolve, _reject) => {
+        dispatch({ type: FETCH_USER, value: user.data });
+        resolve();
+      });
     }
   } catch (error) {
     console.log(error.response.data);

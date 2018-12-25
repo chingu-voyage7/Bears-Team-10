@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { FaPaw } from 'react-icons/fa';
 import { Button } from 'antd';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import * as actions from '../../redux/auth';
+import { logout } from '../../redux/auth';
+import { clearProjectData } from '../../redux/projects';
 
 class Header extends Component {
   state = {};
-
-  componentDidMount() {
-    this.props.fetchUser();
-  }
 
   render() {
     const { user } = this.props;
@@ -34,7 +30,9 @@ class Header extends Component {
                 href="#"
                 onClick={async e => {
                   e.preventDefault();
-                  this.props.logout(() => this.props.history.push('/'));
+                  await this.props.logout();
+                  this.props.clearProjectData();
+                  this.props.history.push('/');
                 }}
               >
                 <span> Logout?</span>
@@ -58,6 +56,6 @@ function mapStateToProps(state) {
 export default withRouter(
   connect(
     mapStateToProps,
-    actions
+    { logout, clearProjectData }
   )(Header)
 );
