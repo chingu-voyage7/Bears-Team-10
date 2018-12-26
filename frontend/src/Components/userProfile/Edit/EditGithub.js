@@ -1,0 +1,75 @@
+import React, { Component } from "react";
+import { Form, Input, Tooltip, Button, Select } from "antd";
+
+const FormItem = Form.Item;
+const { TextArea } = Input;
+
+class EditGithub extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      github: ""
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.profile) {
+      this.setState({
+        github: this.props.user.github
+      });
+    }
+  }
+
+  handleChange = propName => e => {
+    console.log(propName);
+    console.log(e.target.value);
+
+    // const { profile } = this.state;
+    // const newProfile = {
+    //   ...profile,
+    //   [propName]: e.target.value
+    // };
+    this.setState({ [propName]: e.target.value });
+  };
+
+  handleCancel() {
+    this.props.handleCancel("Github");
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    //this.handleEditGithub(this.state.profile);
+    this.props.editProfileComponent("Github", this.state.github);
+    console.log("this.state.github");
+    console.log(this.state.github);
+  }
+
+  render() {
+    return (
+      <div className="EditGithub">
+        <Form onSubmit={this.handleSubmit}>
+          <FormItem label="Github">
+            <Input
+              placeholder="Github"
+              github="github"
+              type="text"
+              value={this.state.github}
+              onChange={this.handleChange("github")}
+            />
+          </FormItem>
+          <div className="FormButtons">
+            <input type="submit" value="Submit" />
+            <Button type="danger" onClick={this.handleCancel}>
+              Cancel
+            </Button>
+          </div>
+        </Form>
+      </div>
+    );
+  }
+}
+
+export default EditGithub;
