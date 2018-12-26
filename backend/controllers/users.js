@@ -8,6 +8,16 @@ async function hello(ctx) {
   });
 }
 
+async function getUser(ctx) {
+  let user = ctx.state.user.id;
+  console.log(user);
+  const currentUser = await db.getUserProfile(user);
+  console.log(currentUser);
+  ctx.send(200, {
+    currentUser
+  });
+}
+
 async function updateUserProfile(ctx) {
   const updatedUser = await db.updateUserProfile(
     ctx.request.body.profile_picture,
@@ -24,7 +34,13 @@ async function updateUserProfile(ctx) {
   });
 }
 
+async function deleteUserById(ctx) {
+  const deleteUser = await db.deleteUserById(ctx.state.user.id);
+}
+
 module.exports = {
   hello,
-  updateUserProfile
+  getUser,
+  updateUserProfile,
+  deleteUserById
 };
