@@ -9,6 +9,7 @@ import { fetchProjects } from './redux/projects';
 import Register from './Components/Authentication/Register';
 import Login from './Components/Authentication/Login';
 import CreateProject from './Components/Projects/CreateProject';
+import Profile from './Components/UserProfile/Profile';
 
 class App extends Component {
   async componentDidMount() {
@@ -25,6 +26,7 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/create-project" component={CreateProject} />
+            <Route exact path="/profile" component={Profile} />
           </div>
         </BrowserRouter>
       </div>
