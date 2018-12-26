@@ -7,4 +7,5 @@ router.get("/", requireAuth, Ctrl.getUser);
 router.put("/", requireAuth, Ctrl.updateUserProfile);
 router.delete("/", requireAuth, Ctrl.deleteUserById);
 
+
 module.exports = router.routes();
