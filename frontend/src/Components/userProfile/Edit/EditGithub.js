@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Form, Input, Tooltip, Button, Select } from "antd";
+import React, { Component } from 'react';
+import { Form, Input, Tooltip, Button, Select } from 'antd';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -8,7 +8,7 @@ class EditGithub extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      github: ""
+      github: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -18,7 +18,7 @@ class EditGithub extends Component {
   componentDidMount() {
     if (this.props.profile) {
       this.setState({
-        github: this.props.user.github
+        github: this.props.user.github,
       });
     }
   }
@@ -36,20 +36,20 @@ class EditGithub extends Component {
   };
 
   handleCancel() {
-    this.props.handleCancel("Github");
+    this.props.handleCancel('Github');
   }
 
   handleSubmit(e) {
     e.preventDefault();
     //this.handleEditGithub(this.state.profile);
-    this.props.editProfileComponent("Github", this.state.github);
-    console.log("this.state.github");
+    this.props.editProfileComponent('Github', this.state.github);
+    console.log('this.state.github');
     console.log(this.state.github);
   }
 
   render() {
     return (
-      <div className="EditGithub">
+      <div className="EditGithub Edit_Form">
         <Form onSubmit={this.handleSubmit}>
           <FormItem label="Github">
             <Input
@@ -57,11 +57,13 @@ class EditGithub extends Component {
               github="github"
               type="text"
               value={this.state.github}
-              onChange={this.handleChange("github")}
+              onChange={this.handleChange('github')}
             />
           </FormItem>
           <div className="FormButtons">
-            <input type="submit" value="Submit" />
+            <Button type="primary" htmlType="submit" value="Submit">
+              Submit
+            </Button>
             <Button type="danger" onClick={this.handleCancel}>
               Cancel
             </Button>

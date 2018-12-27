@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Form, Input, Tooltip, Button, Select } from "antd";
+import React, { Component } from 'react';
+import { Form, Input, Tooltip, Button, Select } from 'antd';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -8,7 +8,7 @@ class EditName extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: ""
+      name: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -18,7 +18,7 @@ class EditName extends Component {
   componentDidMount() {
     if (this.props.profile) {
       this.setState({
-        name: this.props.user.name
+        name: this.props.user.name,
       });
     }
   }
@@ -36,20 +36,20 @@ class EditName extends Component {
   };
 
   handleCancel() {
-    this.props.handleCancel("Name");
+    this.props.handleCancel('Name');
   }
 
   handleSubmit(e) {
     e.preventDefault();
     //this.handleEditName(this.state.profile);
-    this.props.editProfileComponent("Name", this.state.name);
-    console.log("this.state.profile");
+    this.props.editProfileComponent('Name', this.state.name);
+    console.log('this.state.profile');
     console.log(this.state.profile);
   }
 
   render() {
     return (
-      <div className="EditName">
+      <div className="EditName Edit_Form">
         <Form onSubmit={this.handleSubmit}>
           <FormItem label="Name">
             <Input
@@ -57,11 +57,16 @@ class EditName extends Component {
               name="name"
               type="text"
               value={this.state.name}
-              onChange={this.handleChange("name")}
+              onChange={this.handleChange('name')}
             />
           </FormItem>
           <div className="FormButtons">
-            <input type="submit" value="Submit" />
+            {
+              //<input type="submit" value="Submit" />
+            }
+            <Button type="primary" htmlType="submit" value="Submit">
+              Submit
+            </Button>
             <Button type="danger" onClick={this.handleCancel}>
               Cancel
             </Button>

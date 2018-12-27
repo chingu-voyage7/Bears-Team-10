@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Form, Input, Tooltip, Button, Select } from "antd";
+import React, { Component } from 'react';
+import { Form, Input, Tooltip, Button, Select } from 'antd';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -8,7 +8,7 @@ class EditBio extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bio: ""
+      bio: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -16,11 +16,15 @@ class EditBio extends Component {
   }
 
   componentDidMount() {
-    if (this.props.profile) {
-      this.setState({
-        bio: this.props.user.bio
-      });
+    let bioValue = '';
+    if (this.props.user) {
+      bioValue = this.props.user.bio;
+    } else {
+      //bioValue = 'A wise old owl lived in an oak, the more he saw the less he spo...';
     }
+    this.setState({
+      bio: bioValue,
+    });
   }
 
   handleChange = propName => e => {
@@ -36,37 +40,38 @@ class EditBio extends Component {
   };
 
   handleCancel() {
-    this.props.handleCancel("Bio");
+    this.props.handleCancel('Bio');
   }
 
   handleSubmit(e) {
     e.preventDefault();
     //this.handleEditBio(this.state.profile);
-    this.props.editProfileComponent("Bio", this.state.bio);
-    console.log("this.state.bio");
+    this.props.editProfileComponent('Bio', this.state.bio);
+    console.log('this.state.bio');
     console.log(this.state.bio);
   }
 
   render() {
+    const textPlaceholder =
+      'A wise old owl lived in an oak, the more he saw the less he spo...';
     return (
-      <div className="EditBio">
-        <Form onSubmit={this.handleSubmit}>
-          <FormItem label="Bio">
-            <Input
-              placeholder="Bio"
-              bio="bio"
-              type="text"
-              value={this.state.bio}
-              onChange={this.handleChange("bio")}
-            />
-          </FormItem>
-          <div className="FormButtons">
-            <input type="submit" value="Submit" />
-            <Button type="danger" onClick={this.handleCancel}>
-              Cancel
-            </Button>
-          </div>
-        </Form>
+      <div className="EditBio Edit_Form">
+        <h4> Give us those sweet deets </h4>
+
+        <TextArea
+          placeholder={textPlaceholder}
+          value={this.state.bio}
+          onChange={this.handleChange('bio')}
+          rows={4}
+        />
+        <div className="FormButtons">
+          <Button type="primary" onClick={this.handleSubmit} value="Submit">
+            Submit
+          </Button>
+          <Button type="danger" onClick={this.handleCancel}>
+            Cancel
+          </Button>
+        </div>
       </div>
     );
   }

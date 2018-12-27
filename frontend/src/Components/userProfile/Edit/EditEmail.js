@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Form, Input, Tooltip, Button, Select } from "antd";
+import React, { Component } from 'react';
+import { Form, Input, Tooltip, Button, Select } from 'antd';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -8,7 +8,7 @@ class EditEmail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: ""
+      email: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -18,7 +18,7 @@ class EditEmail extends Component {
   componentDidMount() {
     if (this.props.profile) {
       this.setState({
-        email: this.props.user.email
+        email: this.props.user.email,
       });
     }
   }
@@ -36,20 +36,20 @@ class EditEmail extends Component {
   };
 
   handleCancel() {
-    this.props.handleCancel("Email");
+    this.props.handleCancel('Email');
   }
 
   handleSubmit(e) {
     e.preventDefault();
     //this.handleEditEmail(this.state.profile);
-    this.props.editProfileComponent("Email", this.state.email);
-    console.log("this.state.email");
+    this.props.editProfileComponent('Email', this.state.email);
+    console.log('this.state.email');
     console.log(this.state.email);
   }
 
   render() {
     return (
-      <div className="EditEmail">
+      <div className="EditEmail Edit_Form">
         <Form onSubmit={this.handleSubmit}>
           <FormItem label="Email">
             <Input
@@ -57,11 +57,13 @@ class EditEmail extends Component {
               email="email"
               type="text"
               value={this.state.email}
-              onChange={this.handleChange("email")}
+              onChange={this.handleChange('email')}
             />
           </FormItem>
           <div className="FormButtons">
-            <input type="submit" value="Submit" />
+            <Button type="primary" htmlType="submit" value="Submit">
+              Submit
+            </Button>
             <Button type="danger" onClick={this.handleCancel}>
               Cancel
             </Button>
