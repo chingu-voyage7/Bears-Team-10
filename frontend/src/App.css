@@ -24,6 +24,54 @@
   color: #61dafb;
 }
 
+.Profile {
+  display: flex;
+  flex-direction: column;
+  margin: 1em;
+}
+
+.Profile_Component {
+  border-bottom: 1px solid black;
+  width: 100%;
+  padding: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.Profile_Photo {
+  display: flex;
+  flex-direction: column;
+}
+
+.Profile_photo_image {
+  margin: 1em;
+}
+
+.Display_Value {
+}
+
+.Profile_Field {
+  width: 100%;
+  height: 2em;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.Edit_Icon {
+}
+
+.Edit_Form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Profile_Field:hover + .Edit_Icon {
+  display: block;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
