@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Form, Input, Tooltip, Button, Select } from 'antd';
+import { Input, Button } from 'antd';
 
-const FormItem = Form.Item;
 const { TextArea } = Input;
 
 class EditInterests extends Component {
@@ -17,10 +16,10 @@ class EditInterests extends Component {
 
   componentDidMount() {
     let interestsValue = '';
-    if (this.props.user) {
-      interestsValue = this.props.user.interests;
+    if (this.props.interests) {
+      interestsValue = this.props.interests;
     } else {
-      //interestsValue = 'Itsy Bitsy spider climbing up the spout. Down came the rain and washed the spider out';
+      // interestsValue = 'Itsy Bitsy spider climbing up the spout. Down came the rain and washed the spider out';
     }
     this.setState({
       interests: interestsValue,
@@ -45,7 +44,7 @@ class EditInterests extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    //this.handleEditInterests(this.state.profile);
+    // this.handleEditInterests(this.state.profile);
     this.props.editProfileComponent('Interests', this.state.interests);
     console.log('this.state.interests');
     console.log(this.state.interests);
@@ -57,7 +56,7 @@ class EditInterests extends Component {
 
     return (
       <div className="EditInterests Edit_Form">
-        <h4>What do you day dream about?</h4>
+        <h5>What do you day dream about?</h5>
 
         <TextArea
           placeholder={textPlaceholder}

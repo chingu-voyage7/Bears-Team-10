@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Form, Input, Tooltip, Button, Select } from 'antd';
+import { Form, Input, Button } from 'antd';
 
 const FormItem = Form.Item;
-const { TextArea } = Input;
 
 class EditGithub extends Component {
   constructor(props) {
@@ -16,9 +15,9 @@ class EditGithub extends Component {
   }
 
   componentDidMount() {
-    if (this.props.profile) {
+    if (this.props.github) {
       this.setState({
-        github: this.props.user.github,
+        github: this.props.github,
       });
     }
   }
@@ -41,7 +40,7 @@ class EditGithub extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    //this.handleEditGithub(this.state.profile);
+    // this.handleEditGithub(this.state.profile);
     this.props.editProfileComponent('Github', this.state.github);
     console.log('this.state.github');
     console.log(this.state.github);
@@ -51,7 +50,7 @@ class EditGithub extends Component {
     return (
       <div className="EditGithub Edit_Form">
         <Form onSubmit={this.handleSubmit}>
-          <FormItem label="Github">
+          <FormItem>
             <Input
               placeholder="Github"
               github="github"

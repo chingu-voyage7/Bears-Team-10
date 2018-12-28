@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Form, Input, Tooltip, Button, Select } from 'antd';
+import { Input, Button } from 'antd';
 
-const FormItem = Form.Item;
 const { TextArea } = Input;
 
 class EditBio extends Component {
@@ -17,10 +16,10 @@ class EditBio extends Component {
 
   componentDidMount() {
     let bioValue = '';
-    if (this.props.user) {
-      bioValue = this.props.user.bio;
+    if (this.props.bio) {
+      bioValue = this.props.bio;
     } else {
-      //bioValue = 'A wise old owl lived in an oak, the more he saw the less he spo...';
+      // bioValue = 'A wise old owl lived in an oak, the more he saw the less he spo...';
     }
     this.setState({
       bio: bioValue,
@@ -45,7 +44,7 @@ class EditBio extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    //this.handleEditBio(this.state.profile);
+    // this.handleEditBio(this.state.profile);
     this.props.editProfileComponent('Bio', this.state.bio);
     console.log('this.state.bio');
     console.log(this.state.bio);
@@ -56,7 +55,7 @@ class EditBio extends Component {
       'A wise old owl lived in an oak, the more he saw the less he spo...';
     return (
       <div className="EditBio Edit_Form">
-        <h4> Give us those sweet deets </h4>
+        <h5> Give us those sweet deets </h5>
 
         <TextArea
           placeholder={textPlaceholder}

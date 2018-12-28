@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Form, Input, Tooltip, Button, Select } from 'antd';
+import { Form, Input, Button } from 'antd';
 
 const FormItem = Form.Item;
-const { TextArea } = Input;
 
 class EditEmail extends Component {
   constructor(props) {

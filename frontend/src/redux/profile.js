@@ -1,4 +1,5 @@
 const FETCH_USER_PROFILE = 'FETCH_USER_PROFILE';
+const UPDATE_USER_PROFILE = 'UPDATE_USER_PROFILE';
 const axios = require('axios');
 
 const initialState = {
@@ -15,6 +16,22 @@ export const fetchUserProfile = () => async dispatch => {
   return new Promise((resolve, _reject) => {
     dispatch({
       type: FETCH_USER_PROFILE,
+      value: res.data,
+    });
+    resolve();
+  });
+};
+
+export const updateUserProfile = (key, value) => async dispatch => {
+  console.log('redux store');
+  console.log('key');
+  console.log(key);
+  console.log('value');
+  console.log(value);
+  const res = await axios.put('/api/users/updateUserProfile');
+  return new Promise((resolve, _reject) => {
+    dispatch({
+      type: UPDATE_USER_PROFILE,
       value: res.data,
     });
     resolve();
@@ -51,6 +68,8 @@ export default function reducer(state = initialState, action) {
         }
       });
       return { ...state, ...test };
+    case UPDATE_USER_PROFILE:
+      return { ...action.value.currentUser };
     default:
       return state;
   }

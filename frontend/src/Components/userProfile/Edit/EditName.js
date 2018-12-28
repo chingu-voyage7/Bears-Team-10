@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import { Form, Input, Tooltip, Button, Select } from 'antd';
+import { Form, Input, Button } from 'antd';
 
 const FormItem = Form.Item;
-const { TextArea } = Input;
 
 class EditName extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      display_name: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -16,9 +15,9 @@ class EditName extends Component {
   }
 
   componentDidMount() {
-    if (this.props.profile) {
+    if (this.props.display_name) {
       this.setState({
-        name: this.props.user.name,
+        display_name: this.props.display_name,
       });
     }
   }
@@ -41,28 +40,28 @@ class EditName extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    //this.handleEditName(this.state.profile);
-    this.props.editProfileComponent('Name', this.state.name);
-    console.log('this.state.profile');
-    console.log(this.state.profile);
+    // this.handleEditName(this.state.profile);
+    this.props.editProfileComponent('display_name', this.state.display_name);
+    console.log('this.state.display_name');
+    console.log(this.state.display_name);
   }
 
   render() {
     return (
       <div className="EditName Edit_Form">
         <Form onSubmit={this.handleSubmit}>
-          <FormItem label="Name">
+          <FormItem>
             <Input
               placeholder="Name"
-              name="name"
+              display_name="display_name"
               type="text"
-              value={this.state.name}
-              onChange={this.handleChange('name')}
+              value={this.state.display_name}
+              onChange={this.handleChange('display_name')}
             />
           </FormItem>
           <div className="FormButtons">
             {
-              //<input type="submit" value="Submit" />
+              // <input type="submit" value="Submit" />
             }
             <Button type="primary" htmlType="submit" value="Submit">
               Submit
