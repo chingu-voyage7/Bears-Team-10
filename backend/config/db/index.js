@@ -25,6 +25,10 @@ const queries = {
     ]);
     return result.rows[0];
   },
+  updateProfileComponent: async (key, value, id) => {
+    const result = await pool.query(`UPDATE users SET ${key}=$1 where id=$2 RETURNING *`,[value, id])
+    return result.rows[0];
+  },
   updateUserProfile: async (
     profile_picture,
     display_name,
@@ -38,8 +42,6 @@ const queries = {
       bio=$3, interests=$4, github=$5 WHERE id=$6 RETURNING *;`,
       [profile_picture, display_name, bio, interests, github, id]
     );
-    console.log(result);
-    console.log(display_name);
     return result.rows[0];
   },
   deleteUserById: async userId => {

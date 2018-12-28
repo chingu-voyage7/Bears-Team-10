@@ -10,11 +10,19 @@ async function hello(ctx) {
 
 async function getUser(ctx) {
   let user = ctx.state.user.id;
-  console.log(user);
   const currentUser = await db.getUserProfile(user);
-  console.log(currentUser);
   ctx.send(200, {
     currentUser
+  });
+}
+
+async function updateProfileComponent(ctx){
+  const user = ctx.state.user.id;
+  const { key, value } = {...ctx.request.body}
+  const updatedUser = await db.updateProfileComponent(key, value, user);
+  ctx.send(201, {
+    message: "Update Succesful!",
+    user: updatedUser
   });
 }
 
@@ -27,7 +35,6 @@ async function updateUserProfile(ctx) {
     ctx.request.body.github,
     ctx.state.user.id
   );
-  console.log(updatedUser);
   ctx.send(201, {
     message: "Update Succesful!",
     user: updatedUser
@@ -41,6 +48,7 @@ async function deleteUserById(ctx) {
 module.exports = {
   hello,
   getUser,
+  updateProfileComponent,
   updateUserProfile,
   deleteUserById
 };

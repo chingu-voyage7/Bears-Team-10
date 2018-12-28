@@ -3,8 +3,10 @@ const router = new Router();
 const Ctrl = require("../controllers/users");
 const requireAuth = require("../controllers/auth").requireAuth;
 
-router.get("/", requireAuth, Ctrl.getUser);
-router.put("/", requireAuth, Ctrl.updateUserProfile);
+router.get("/getUser", requireAuth, Ctrl.getUser);
+//router.get("/hello", requireAuth, Ctrl.hello);/
+router.put("/updateProfileComponent", requireAuth, Ctrl.updateProfileComponent);
+router.put("/updateUserProfile", requireAuth, Ctrl.updateUserProfile);
 router.delete("/", requireAuth, Ctrl.deleteUserById);
 
 
