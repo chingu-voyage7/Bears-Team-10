@@ -22,17 +22,17 @@ export const fetchUserProfile = () => async dispatch => {
   });
 };
 
-export const updateUserProfile = (key, value) => async dispatch => {
-  console.log('redux store');
-  console.log('key');
-  console.log(key);
-  console.log('value');
-  console.log(value);
-  const res = await axios.put('/api/users/updateUserProfile');
+export const updateProfileComponent = (key, value) => async dispatch => {
+  const res = await axios('/api/users/updateProfileComponent', {
+    method: 'put',
+    data: { key, value },
+    withCredentials: true,
+  });
   return new Promise((resolve, _reject) => {
     dispatch({
       type: UPDATE_USER_PROFILE,
-      value: res.data,
+      value: res.data.user[key],
+      key,
     });
     resolve();
   });
@@ -69,7 +69,7 @@ export default function reducer(state = initialState, action) {
       });
       return { ...state, ...test };
     case UPDATE_USER_PROFILE:
-      return { ...action.value.currentUser };
+      return { ...state, [action.key]: action.value };
     default:
       return state;
   }
