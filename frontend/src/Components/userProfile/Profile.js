@@ -1,174 +1,174 @@
-import React, { Component } from "react";
-import EditProfile from "./Edit/EditProfile";
-import EditName from "./Edit/EditName";
-import EditEmail from "./Edit/EditEmail";
-import EditBio from "./Edit/EditBio";
-import EditInterests from "./Edit/EditInterests";
-import EditGithub from "./Edit/EditGithub";
+import React, { Component } from 'react';
+import { Avatar, Button } from 'antd';
 
-import { FaEdit } from "react-icons/fa";
+import { connect } from 'react-redux';
+import { FaEdit } from 'react-icons/fa';
+import { fetchUserProfile, updateProfileComponent } from '../../redux/profile';
+
+import EditName from './Edit/EditName';
+import EditBio from './Edit/EditBio';
+import EditInterests from './Edit/EditInterests';
+import EditGithub from './Edit/EditGithub';
 
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Show_Edit: false,
-      Show_Name: false,
-      Show_Email: false,
+      Show_Display_Name: false,
       Show_Bio: false,
-      Show_Interests: false
+      Show_Interests: false,
+      Show_Github: false,
     };
-    this.handleEditProfile = this.handleEditProfile.bind(this);
     this.handleUploadPhoto = this.handleUploadPhoto.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
     this.editProfileComponent = this.editProfileComponent.bind(this);
   }
 
-  handleEditProfile() {
-    let show = this.state.Show_edit ? false : true;
-    this.setState({
-      Show_edit: show
-    });
-  }
-
-  editProfileComponent(a, b) {
-    console.log(a);
-    console.log(b);
-    this.handleCancel(a);
+  async componentDidMount() {
+    this.props.fetchUserProfile();
   }
 
   handleUploadPhoto() {
-    console.log("upload photo");
+    console.log('upload photo');
   }
 
   handleCancel(value) {
-    const keyValue = "Show_" + value;
+    const keyValue = `Show_${value}`;
     this.setState({
-      [keyValue]: false
+      [keyValue]: false,
     });
   }
 
   sortShowEdit = event => {
-    // console.log(event.currentTarget.className);
     const className = event.currentTarget.className;
     const showValue = className.match(/[^\s]+/);
-    const clickedValue = "Show_" + showValue;
+    const clickedValue = `Show_${showValue}`;
+    const newValue = !this.state[clickedValue];
 
-    const newValue = this.state[clickedValue] ? false : true;
-    this.setState({
-      [clickedValue]: newValue
+    const { showValues } = this.state;
+    const stateKeys = Object.keys(this.state);
+    let newState;
+    // turns off any other edit screen that may have been left open
+    stateKeys.forEach(x => {
+      if (x !== clickedValue) {
+        newState = {
+          ...showValues,
+          [x]: false,
+        };
+      }
+      this.setState({
+        ...newState,
+        [clickedValue]: newValue,
+      });
     });
   };
 
-  render() {
-    const bottomBorder = {
-      border: "1px solid black",
-      width: "100%",
-      padding: "10px"
-    };
+  editProfileComponent(key, value) {
+    this.handleCancel(key);
+    this.props.updateProfileComponent(key.toLowerCase(), value);
+  }
 
+  render() {
     return (
       <div className="Profile">
-        <div
-          style={{
-            background: "black",
-            width: "100%",
-            border: "1px solid black",
-            padding: "10px"
-          }}
-        >
-          {" "}
-        </div>
-        <div className="Profile_photo">
-          <div className="Profile_photo_image">Image</div>
+        <div className="Profile_Photo Profile_Component">
+          <div className="Profile_photo_image">
+            {this.state.photo ? (
+              this.props.profile.profile_picture
+            ) : (
+              <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>
+                U
+              </Avatar>
+            )}
+          </div>
           <div
             className="Profile_upload_photo"
             onClick={this.handleUploadPhoto}
           >
-            [Insert]Upload Photo
+            <Button type="dashed">Upload</Button>
           </div>
         </div>
 
-        <div className="Profile_contents" style={bottomBorder}>
-          <div className="Profile_name" style={bottomBorder}>
-            {this.state.Show_Name ? (
+        <div className="Profile_Display_Name Profile_Component">
+          <div className="Profile_Field">
+            <div className="Display_Name Edit_Icon" onClick={this.sortShowEdit}>
+              <FaEdit />
+            </div>
+            {this.state.Show_Display_Name ? (
               <EditName
+                display_name={this.props.profile.display_name}
                 handleCancel={this.handleCancel}
                 editProfileComponent={this.editProfileComponent}
               />
             ) : (
-              <div className="Profile_Field">
-                <div className="Name Edit_Icon" onClick={this.sortShowEdit}>
-                  <FaEdit />
-                </div>
-                <div className="Display_Value">Name: {this.props.name}</div>
+              <div className="Value_Content">
+                {this.props.profile.display_name}
               </div>
             )}
+            <div className="Value_Header">
+              <h3>Name</h3>
+            </div>
           </div>
-          <div className="Profile_Email" style={bottomBorder}>
-            {this.state.Show_Email ? (
-              <EditEmail
-                handleCancel={this.handleCancel}
-                editProfileComponent={this.editProfileComponent}
-              />
-            ) : (
-              <div className="Profile_Field">
-                <div className="Email Edit_Icon" onClick={this.sortShowEdit}>
-                  <FaEdit />
-                </div>
-                <div className="Display_Value">Email: {this.props.email}</div>
-              </div>
-            )}
-          </div>
-          <div className="Profile_Bio" style={bottomBorder}>
+        </div>
+
+        <div className="Profile_Bio Profile_Component">
+          <div className="Profile_Field">
+            <div className="Bio Edit_Icon" onClick={this.sortShowEdit}>
+              <FaEdit />
+            </div>
             {this.state.Show_Bio ? (
               <EditBio
+                bio={this.props.profile.bio}
                 handleCancel={this.handleCancel}
                 editProfileComponent={this.editProfileComponent}
               />
             ) : (
-              <div className="Profile_Field">
-                <div className="Bio Edit_Icon" onClick={this.sortShowEdit}>
-                  <FaEdit />
-                </div>
-                <div className="Display_Value">Bio: {this.props.bio}</div>
-              </div>
+              <div className="Value_Content">{this.props.profile.bio}</div>
             )}
+            <div className="Value_Header">
+              <h3>Bio</h3>
+            </div>
           </div>
-          <div className="Profile_Interests" style={bottomBorder}>
+        </div>
+        <div className="Profile_Interests Profile_Component">
+          <div className="Profile_Field">
+            <div className="Interests Edit_Icon" onClick={this.sortShowEdit}>
+              <FaEdit />
+            </div>
             {this.state.Show_Interests ? (
               <EditInterests
+                interests={this.props.profile.interests}
                 handleCancel={this.handleCancel}
                 editProfileComponent={this.editProfileComponent}
               />
             ) : (
-              <div className="Profile_Field">
-                <div
-                  className="Interests Edit_Icon"
-                  onClick={this.sortShowEdit}
-                >
-                  <FaEdit />
-                </div>
-                <div className="Display_Value">
-                  Interests: {this.props.interests}
-                </div>
+              <div className="Value_Content">
+                {this.props.profile.interests}
               </div>
             )}
+            <div className="Value_Header">
+              <h3>Interests</h3>
+            </div>
           </div>
-          <div className="Profile_Github" style={bottomBorder}>
+        </div>
+
+        <div className="Profile_Github Profile_Component">
+          <div className="Profile_Field">
+            <div className="Github Edit_Icon" onClick={this.sortShowEdit}>
+              <FaEdit />
+            </div>
             {this.state.Show_Github ? (
               <EditGithub
+                github={this.props.profile.github}
                 handleCancel={this.handleCancel}
                 editProfileComponent={this.editProfileComponent}
               />
             ) : (
-              <div className="Profile_Field">
-                <div className="Github Edit_Icon" onClick={this.sortShowEdit}>
-                  <FaEdit />
-                </div>
-                <div className="Display_Value">Github: {this.props.github}</div>
-              </div>
+              <div className="Value_Content">{this.props.profile.github}</div>
             )}
+            <div className="Value_Header">
+              <h3>Github</h3>
+            </div>
           </div>
         </div>
       </div>
@@ -176,4 +176,20 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+const mapStateToProps = state => ({
+  profile: state.profile,
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchUserProfile: () => {
+    dispatch(fetchUserProfile());
+  },
+  updateProfileComponent: (key, value) => {
+    dispatch(updateProfileComponent(key, value));
+  },
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Profile);

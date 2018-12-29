@@ -49,7 +49,7 @@ class Register extends Component {
             rules: [
               { required: true, message: 'Please enter your password' },
               {
-                len: 6,
+                min: 6,
                 message: 'Password should be at least 6 characters in length',
               },
             ],
