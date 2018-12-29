@@ -27,14 +27,6 @@ class EditInterests extends Component {
   }
 
   handleChange = propName => e => {
-    console.log(propName);
-    console.log(e.target.value);
-
-    // const { profile } = this.state;
-    // const newProfile = {
-    //   ...profile,
-    //   [propName]: e.target.value
-    // };
     this.setState({ [propName]: e.target.value });
   };
 
@@ -44,10 +36,7 @@ class EditInterests extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // this.handleEditInterests(this.state.profile);
     this.props.editProfileComponent('Interests', this.state.interests);
-    console.log('this.state.interests');
-    console.log(this.state.interests);
   }
 
   render() {

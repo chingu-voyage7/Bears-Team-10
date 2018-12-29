@@ -23,27 +23,16 @@ class EditName extends Component {
   }
 
   handleChange = propName => e => {
-    console.log(propName);
-    console.log(e.target.value);
-
-    // const { profile } = this.state;
-    // const newProfile = {
-    //   ...profile,
-    //   [propName]: e.target.value
-    // };
     this.setState({ [propName]: e.target.value });
   };
 
   handleCancel() {
-    this.props.handleCancel('Name');
+    this.props.handleCancel('Display_Name');
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    // this.handleEditName(this.state.profile);
-    this.props.editProfileComponent('display_name', this.state.display_name);
-    console.log('this.state.display_name');
-    console.log(this.state.display_name);
+    this.props.editProfileComponent('Display_Name', this.state.display_name);
   }
 
   render() {

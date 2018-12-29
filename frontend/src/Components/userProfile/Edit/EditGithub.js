@@ -23,14 +23,6 @@ class EditGithub extends Component {
   }
 
   handleChange = propName => e => {
-    console.log(propName);
-    console.log(e.target.value);
-
-    // const { profile } = this.state;
-    // const newProfile = {
-    //   ...profile,
-    //   [propName]: e.target.value
-    // };
     this.setState({ [propName]: e.target.value });
   };
 
@@ -40,10 +32,7 @@ class EditGithub extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // this.handleEditGithub(this.state.profile);
     this.props.editProfileComponent('Github', this.state.github);
-    console.log('this.state.github');
-    console.log(this.state.github);
   }
 
   render() {

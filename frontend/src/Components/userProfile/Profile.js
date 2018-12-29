@@ -3,7 +3,7 @@ import { Avatar, Button } from 'antd';
 
 import { connect } from 'react-redux';
 import { FaEdit } from 'react-icons/fa';
-import { fetchUserProfile, updateUserProfile } from '../../redux/profile';
+import { fetchUserProfile, updateProfileComponent } from '../../redux/profile';
 
 import EditName from './Edit/EditName';
 import EditBio from './Edit/EditBio';
@@ -14,7 +14,7 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Show_Name: false,
+      Show_Display_Name: false,
       Show_Bio: false,
       Show_Interests: false,
       Show_Github: false,
@@ -26,16 +26,6 @@ class Profile extends Component {
 
   async componentDidMount() {
     this.props.fetchUserProfile();
-  }
-
-  editProfileComponent(key, value) {
-    console.log('editprofilecomponent');
-    console.log('key');
-    console.log(key);
-    console.log('value');
-    console.log(value);
-    updateUserProfile(key, value);
-    this.handleCancel(key);
   }
 
   handleUploadPhoto() {
@@ -73,6 +63,11 @@ class Profile extends Component {
     });
   };
 
+  editProfileComponent(key, value) {
+    this.handleCancel(key);
+    this.props.updateProfileComponent(key.toLowerCase(), value);
+  }
+
   render() {
     return (
       <div className="Profile">
@@ -94,12 +89,12 @@ class Profile extends Component {
           </div>
         </div>
 
-        <div className="Profile_name Profile_Component">
+        <div className="Profile_Display_Name Profile_Component">
           <div className="Profile_Field">
-            <div className="Name Edit_Icon" onClick={this.sortShowEdit}>
+            <div className="Display_Name Edit_Icon" onClick={this.sortShowEdit}>
               <FaEdit />
             </div>
-            {this.state.Show_Name ? (
+            {this.state.Show_Display_Name ? (
               <EditName
                 display_name={this.props.profile.display_name}
                 handleCancel={this.handleCancel}
@@ -189,8 +184,8 @@ const mapDispatchToProps = dispatch => ({
   fetchUserProfile: () => {
     dispatch(fetchUserProfile());
   },
-  updateUserProfile: (key, value) => {
-    dispatch(updateUserProfile(key, value));
+  updateProfileComponent: (key, value) => {
+    dispatch(updateProfileComponent(key, value));
   },
 });
 

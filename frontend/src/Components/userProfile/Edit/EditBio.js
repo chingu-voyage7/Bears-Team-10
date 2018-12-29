@@ -27,14 +27,6 @@ class EditBio extends Component {
   }
 
   handleChange = propName => e => {
-    console.log(propName);
-    console.log(e.target.value);
-
-    // const { profile } = this.state;
-    // const newProfile = {
-    //   ...profile,
-    //   [propName]: e.target.value
-    // };
     this.setState({ [propName]: e.target.value });
   };
 
@@ -44,10 +36,7 @@ class EditBio extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // this.handleEditBio(this.state.profile);
     this.props.editProfileComponent('Bio', this.state.bio);
-    console.log('this.state.bio');
-    console.log(this.state.bio);
   }
 
   render() {
