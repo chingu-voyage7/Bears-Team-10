@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+// needed to fix props validation
+import PropTypes from 'prop-types';
+//
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { Form, Input, Icon, Button } from 'antd';
@@ -67,6 +70,17 @@ class Login extends Component {
 }
 
 const WrappedLoginForm = withRouter(Form.create()(Login));
+
+// needed to fix props validation
+Login.propTypes = {
+  fetchProjects: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  form: PropTypes.object.isRequired,
+  login: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  history: PropTypes.object.isRequired,
+};
+//
 
 export default connect(
   null,

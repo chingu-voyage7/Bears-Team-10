@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+// needed to fix props validation
+import PropTypes from 'prop-types';
+//
 import { Input, Button } from 'antd';
 
 const { TextArea } = Input;
@@ -64,5 +67,13 @@ class EditBio extends Component {
     );
   }
 }
+
+// needed to fix props validation
+EditBio.propTypes = {
+  handleCancel: PropTypes.func.isRequired,
+  editProfileComponent: PropTypes.func.isRequired,
+  bio: PropTypes.string.isRequired,
+};
+//
 
 export default EditBio;

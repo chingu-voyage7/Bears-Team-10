@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+// needed to fix props validation
+import PropTypes from 'prop-types';
+//
 import { Avatar, Button } from 'antd';
 
 import { connect } from 'react-redux';
@@ -28,23 +31,11 @@ class Profile extends Component {
     this.props.fetchUserProfile();
   }
 
-  handleUploadPhoto() {
-    console.log('upload photo');
-  }
-
-  handleCancel(value) {
-    const keyValue = `Show_${value}`;
-    this.setState({
-      [keyValue]: false,
-    });
-  }
-
   sortShowEdit = event => {
     const className = event.currentTarget.className;
     const showValue = className.match(/[^\s]+/);
     const clickedValue = `Show_${showValue}`;
     const newValue = !this.state[clickedValue];
-
     const { showValues } = this.state;
     const stateKeys = Object.keys(this.state);
     let newState;
@@ -62,6 +53,17 @@ class Profile extends Component {
       });
     });
   };
+
+  handleUploadPhoto() {
+    console.log('upload photo');
+  }
+
+  handleCancel(value) {
+    const keyValue = `Show_${value}`;
+    this.setState({
+      [keyValue]: false,
+    });
+  }
 
   editProfileComponent(key, value) {
     this.handleCancel(key);
@@ -84,6 +86,9 @@ class Profile extends Component {
           <div
             className="Profile_upload_photo"
             onClick={this.handleUploadPhoto}
+            // This needs to be added with the new eslint stuff
+            role="presentation"
+            //
           >
             <Button type="dashed">Upload</Button>
           </div>
@@ -91,7 +96,11 @@ class Profile extends Component {
 
         <div className="Profile_Display_Name Profile_Component">
           <div className="Profile_Field">
-            <div className="Display_Name Edit_Icon" onClick={this.sortShowEdit}>
+            <div
+              className="Display_Name Edit_Icon"
+              onClick={this.sortShowEdit}
+              role="presentation"
+            >
               <FaEdit />
             </div>
             {this.state.Show_Display_Name ? (
@@ -113,7 +122,11 @@ class Profile extends Component {
 
         <div className="Profile_Bio Profile_Component">
           <div className="Profile_Field">
-            <div className="Bio Edit_Icon" onClick={this.sortShowEdit}>
+            <div
+              className="Bio Edit_Icon"
+              onClick={this.sortShowEdit}
+              role="presentation"
+            >
               <FaEdit />
             </div>
             {this.state.Show_Bio ? (
@@ -132,7 +145,11 @@ class Profile extends Component {
         </div>
         <div className="Profile_Interests Profile_Component">
           <div className="Profile_Field">
-            <div className="Interests Edit_Icon" onClick={this.sortShowEdit}>
+            <div
+              className="Interests Edit_Icon"
+              onClick={this.sortShowEdit}
+              role="presentation"
+            >
               <FaEdit />
             </div>
             {this.state.Show_Interests ? (
@@ -154,7 +171,11 @@ class Profile extends Component {
 
         <div className="Profile_Github Profile_Component">
           <div className="Profile_Field">
-            <div className="Github Edit_Icon" onClick={this.sortShowEdit}>
+            <div
+              className="Github Edit_Icon"
+              onClick={this.sortShowEdit}
+              role="presentation"
+            >
               <FaEdit />
             </div>
             {this.state.Show_Github ? (
@@ -188,6 +209,14 @@ const mapDispatchToProps = dispatch => ({
     dispatch(updateProfileComponent(key, value));
   },
 });
+
+// needed to fix props validation
+Profile.propTypes = {
+  fetchUserProfile: PropTypes.func.isRequired,
+  updateProfileComponent: PropTypes.func.isRequired,
+  profile: PropTypes.string.isRequired,
+};
+//
 
 export default connect(
   mapStateToProps,

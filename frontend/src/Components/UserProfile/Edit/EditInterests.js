@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+// needed to fix props validation
+import PropTypes from 'prop-types';
+//
 import { Input, Button } from 'antd';
 
 const { TextArea } = Input;
@@ -65,5 +68,11 @@ class EditInterests extends Component {
     );
   }
 }
+
+EditInterests.propTypes = {
+  handleCancel: PropTypes.func.isRequired,
+  editProfileComponent: PropTypes.func.isRequired,
+  interests: PropTypes.string.isRequired,
+};
 
 export default EditInterests;
