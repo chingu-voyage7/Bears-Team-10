@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+// needed to fix props validation
+import PropTypes from 'prop-types';
+//
 import { Form, Input, Button } from 'antd';
 
 const FormItem = Form.Item;
@@ -61,5 +64,11 @@ class EditGithub extends Component {
     );
   }
 }
+
+EditGithub.propTypes = {
+  handleCancel: PropTypes.func.isRequired,
+  editProfileComponent: PropTypes.func.isRequired,
+  github: PropTypes.string.isRequired,
+};
 
 export default EditGithub;

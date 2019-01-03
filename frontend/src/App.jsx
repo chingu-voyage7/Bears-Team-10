@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+// needed to fix props validation
+import PropTypes from 'prop-types';
+//
 import { connect } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Header from './Components/Header/Header';
@@ -33,6 +36,13 @@ class App extends Component {
     );
   }
 }
+
+// needed to fix props validation
+App.propTypes = {
+  fetchUser: PropTypes.func.isRequired,
+  fetchProjects: PropTypes.func.isRequired,
+};
+//
 
 export default connect(
   null,

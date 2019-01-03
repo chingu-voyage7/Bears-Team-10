@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { FaPaw } from 'react-icons/fa';
 import { Button } from 'antd';
 import { connect } from 'react-redux';
@@ -52,6 +53,15 @@ function mapStateToProps(state) {
     user: state.auth.user,
   };
 }
+
+Header.propTypes = {
+  clearProjectData: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  user: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  history: PropTypes.object.isRequired,
+};
 
 export default withRouter(
   connect(

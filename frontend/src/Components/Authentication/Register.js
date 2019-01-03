@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+// needed to fix props validation
+import PropTypes from 'prop-types';
+//
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Form, Input, Icon, Button } from 'antd';
@@ -73,6 +76,15 @@ class Register extends Component {
 }
 
 const WrappedRegisterForm = Form.create()(Register);
+
+// needed to fix props validation
+Register.propTypes = {
+  fetchProjects: PropTypes.func.isRequired,
+  form: PropTypes.string.isRequired,
+  register: PropTypes.string.isRequired,
+  history: PropTypes.string.isRequired,
+};
+//
 
 export default withRouter(
   connect(

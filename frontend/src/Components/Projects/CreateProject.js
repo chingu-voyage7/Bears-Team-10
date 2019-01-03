@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Form, Input, Button } from 'antd';
@@ -82,6 +83,14 @@ class CreateProject extends Component {
 }
 
 const WrappedCreateProjectForm = withRouter(Form.create()(CreateProject));
+
+CreateProject.propTypes = {
+  createProject: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  form: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  history: PropTypes.object.isRequired,
+};
 
 export default connect(
   null,

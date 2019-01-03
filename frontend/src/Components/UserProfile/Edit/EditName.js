@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+// needed to fix props validation
+import PropTypes from 'prop-types';
+//
 import { Form, Input, Button } from 'antd';
 
 const FormItem = Form.Item;
@@ -64,5 +67,13 @@ class EditName extends Component {
     );
   }
 }
+
+// needed to fix props validation
+EditName.propTypes = {
+  handleCancel: PropTypes.func.isRequired,
+  editProfileComponent: PropTypes.func.isRequired,
+  display_name: PropTypes.string.isRequired,
+};
+//
 
 export default EditName;
