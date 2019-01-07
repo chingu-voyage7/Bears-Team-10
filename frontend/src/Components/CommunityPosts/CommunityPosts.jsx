@@ -1,45 +1,45 @@
-import React from 'react';
-// import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ProjectPosts from './ProjectPosts';
-// import NewPost from '../NewPost/NewPost';
-import './CommunityPosts.css';
+import NewPost from './NewPost';
 import { posts } from '../../posts';
 
-const CommunityPosts = () => (
-  <div className="contentContainer">
-    <div className="contentAndTitles">
-      <div
-        className="projectText"
-        role="presentation"
-        // onClick={() => this.props.history.push('projects', index)}
-      >
-        <div className="projectTitle">
-          <span>{posts[0].title}</span>
+// eslint-disable-next-line react/prefer-stateless-function
+class CommunityPosts extends Component {
+  render() {
+    const { onClickPosts } = this.props;
+    return (
+      <div className="contentContainer">
+        <div className="contentAndTitles">
+          <div
+            className="projectTitle"
+            role="presentation"
+            onClick={onClickPosts}
+          >
+            <span>Click to hide posts</span>
+          </div>
+          <div className="projectTitle">{posts[0].title}</div>
+          <div className="projectDescription">{posts[0].desc}</div>
+          <div className="postList">
+            {posts[0].posts.map(post => (
+              <ProjectPosts
+                key={post.id}
+                id={post.id}
+                name={post.name}
+                message={post.message}
+                date={post.date}
+              />
+            ))}
+            <NewPost />
+          </div>
         </div>
-        <div className="projectDescription">
-          <span>{posts[0].desc}</span>
-        </div>
-        Click to hide posts
       </div>
-      <div className="postList">
-        {posts[0].posts.map(post => (
-          <ProjectPosts
-            key={post.id}
-            id={post.id}
-            name={post.name}
-            message={post.message}
-            date={post.date}
-          />
-        ))}
-        {/* <NewPost /> */}
-      </div>
-    </div>
-  </div>
-);
+    );
+  }
+}
 
 CommunityPosts.propTypes = {
-  // onRouteChange: PropTypes.func.isRequired,
-  // index: PropTypes.string.isRequired,
+  onClickPosts: PropTypes.func.isRequired,
 };
 
 export default CommunityPosts;

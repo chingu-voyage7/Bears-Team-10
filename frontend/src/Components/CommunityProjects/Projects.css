@@ -18,11 +18,6 @@
 	/* cursor: pointer; */
 }
 
-.projectTitle {
-	margin: 1.5vw 0;
-  margin-top: 0;
-  
-}
 .projectTitle span {
 	font-size: 2.5vw;
 	font-weight: bold;
@@ -38,7 +33,7 @@
 }
 .projectDescription span {
 	font-size: 2vw;
-	margin: 5vw;
+	margin: 1vw;
 }
 .projectDescription span:hover {
 	color: #051b7e;

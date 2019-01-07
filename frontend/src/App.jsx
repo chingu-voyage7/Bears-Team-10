@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-// needed to fix props validation
 import PropTypes from 'prop-types';
-//
 import { connect } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Header from './Components/Header/Header';
@@ -17,9 +15,23 @@ import CommunityProjects from './Components/CommunityProjects/CommunityProjects'
 import CommunityPosts from './Components/CommunityPosts/CommunityPosts';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      displayPosts: false,
+    };
+    this.onClickPosts = this.onClickPosts.bind(this);
+  }
+
   async componentDidMount() {
     await this.props.fetchUser();
     this.props.fetchProjects();
+  }
+
+  onClickPosts() {
+    this.setState(prevState => ({
+      displayPosts: !prevState.displayPosts,
+    }));
   }
 
   render() {
@@ -27,7 +39,10 @@ class App extends Component {
       <div>
         <BrowserRouter>
           <div className="App">
-            <Header />
+            <Header
+              displayPosts={this.state.displayPosts}
+              onClickPosts={this.onClickPosts}
+            />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/create-project" component={CreateProject} />
@@ -45,12 +60,10 @@ class App extends Component {
   }
 }
 
-// needed to fix props validation
 App.propTypes = {
   fetchUser: PropTypes.func.isRequired,
   fetchProjects: PropTypes.func.isRequired,
 };
-//
 
 export default connect(
   null,
