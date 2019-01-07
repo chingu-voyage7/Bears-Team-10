@@ -1,8 +1,8 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './Projects.css';
 
+// eslint-disable-next-line react/prefer-stateless-function
 class Projects extends React.Component {
   // constructor(props) {
   //   super(props);
@@ -12,7 +12,7 @@ class Projects extends React.Component {
   // onClickPosts() {
   //   // const index = parseInt(this.index, 10);
   //   this.setState({
-  //     posts: true
+  //     displayPosts: true
   //   });
   // }
 
@@ -23,8 +23,8 @@ class Projects extends React.Component {
         <div
           className="projectText"
           role="presentation"
-          // onClick={this.onClickPosts}
-          onClick={this.setRedirect}
+          // onClick={onClickPosts}
+          // onClick={this.setRedirect}
         >
           <div className="projectTitle">
             <span>{title}</span>
@@ -42,6 +42,7 @@ class Projects extends React.Component {
 Projects.propTypes = {
   title: PropTypes.string.isRequired,
   desc: PropTypes.string.isRequired,
+  // onClickPosts: PropTypes.func.isRequired,
 };
 
-export default withRouter(Projects);
+export default Projects;

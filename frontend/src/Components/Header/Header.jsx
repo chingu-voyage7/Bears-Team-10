@@ -6,12 +6,24 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { logout } from '../../redux/auth';
 import { clearProjectData } from '../../redux/projects';
+import CommunityProjects from '../CommunityProjects/CommunityProjects';
+import CommunityPosts from '../CommunityPosts/CommunityPosts';
 
 class Header extends Component {
-  state = {};
+  state = {
+    displayPosts: false,
+  };
+
+  onClickPosts() {
+    // const index = parseInt(this.index, 10);
+    this.setState({
+      displayPosts: true,
+    });
+    console.log(this.state.displayPosts);
+  }
 
   render() {
-    const { user } = this.props;
+    const { user, allProjects } = this.props;
 
     return (
       <div className="header-div">
@@ -21,28 +33,41 @@ class Header extends Component {
             <h1 className="header-title">Bairs</h1>
           </Link>
         </div>
-        <p>
-          <span>Welcome! </span>
-          {user && user.isLoggedIn ? (
-            <span>
-              {user.user.username}
-              <Button
-                className=""
-                href="#"
-                onClick={async e => {
-                  e.preventDefault();
-                  await this.props.logout();
-                  this.props.clearProjectData();
-                  this.props.history.push('/');
-                }}
-              >
-                <span> Logout?</span>
-              </Button>
-            </span>
-          ) : (
-            <Link to="/login">Sign In</Link>
-          )}
-        </p>
+        {/* <p> */}
+        <span>Welcome! </span>
+        {user && user.isLoggedIn ? (
+          <span>
+            {user.user.username}
+            <Button
+              className=""
+              href="#"
+              onClick={async e => {
+                e.preventDefault();
+                await this.props.logout();
+                this.props.clearProjectData();
+                this.props.history.push('/');
+              }}
+            >
+              <span> Logout?</span>
+            </Button>
+            {(() => {
+              switch (this.state.displayPosts) {
+                case true:
+                  return <CommunityPosts />;
+                default:
+                  return (
+                    <CommunityProjects
+                      allProjects={allProjects}
+                      onClickPosts={this.onClickPosts}
+                    />
+                  );
+              }
+            })()}
+          </span>
+        ) : (
+          <Link to="/login">Sign In</Link>
+        )}
+        {/* </p> */}
       </div>
     );
   }
@@ -51,6 +76,7 @@ class Header extends Component {
 function mapStateToProps(state) {
   return {
     user: state.auth.user,
+    allProjects: state.projects.allProjects,
   };
 }
 
@@ -61,6 +87,8 @@ Header.propTypes = {
   logout: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   history: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  allProjects: PropTypes.array.isRequired,
 };
 
 export default withRouter(

@@ -1,7 +1,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
-import ProjectPosts from '../ProjectPosts/ProjectPosts';
-import NewPost from '../NewPost/NewPost';
+import ProjectPosts from './ProjectPosts';
+// import NewPost from '../NewPost/NewPost';
 import './CommunityPosts.css';
 import { posts } from '../../posts';
 
@@ -31,7 +31,7 @@ const CommunityPosts = () => (
             date={post.date}
           />
         ))}
-        <NewPost />
+        {/* <NewPost /> */}
       </div>
     </div>
   </div>
