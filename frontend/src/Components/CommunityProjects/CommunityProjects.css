@@ -1,0 +1,33 @@
+.projectsTitle {
+  font-size: 4vw;
+  margin: 2vw 2vw;
+}
+
+.projectText {
+  position: relative;
+  width: 90%;
+  margin: auto;
+  
+}
+
+.projectList {
+	padding: 1vw 1vw;
+	width: 95%;
+	overflow-y: auto;
+  overflow-x: hidden;
+  margin: auto;
+}
+
+.contentContainer {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	box-shadow: 0 .15vw .1vw rgba(0, 0, 0, 0.05);
+}
+
+.contentAndTitles {
+  align-items: center;
+  width: 98%;
+  margin: auto;
+}
