@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Projects from './Projects';
 import './CommunityProjects.css';
@@ -35,33 +35,27 @@ import './CommunityProjects.css';
 // onClickPosts={this.onClickPosts}
 // as props for Dashboard Component
 
-// eslint-disable-next-line react/prefer-stateless-function
-class CommunityProjects extends Component {
-  render() {
-    const { allProjects, onClickPosts, displayPosts } = this.props;
-    return (
-      <div className="contentContainer">
-        <div className="contentAndTitles">
-          <div className="projectsTitle">
-            <span> Project List </span>
-          </div>
-          <div className="projectList">
-            {allProjects.map(project => (
-              <Projects
-                key={project.project_id}
-                id={project.project_id}
-                title={project.project_title}
-                desc={project.project_description}
-                onClickPosts={onClickPosts}
-                displayPosts={displayPosts}
-              />
-            ))}
-          </div>
-        </div>
+const CommunityProjects = ({ allProjects, onClickPosts, displayPosts }) => (
+  <div className="contentContainer">
+    <div className="contentAndTitles">
+      <div className="projectsTitle">
+        <span> Project List </span>
       </div>
-    );
-  }
-}
+      <div className="projectList">
+        {allProjects.map(project => (
+          <Projects
+            key={project.project_id}
+            id={project.project_id}
+            title={project.project_title}
+            desc={project.project_description}
+            onClickPosts={onClickPosts}
+            displayPosts={displayPosts}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+);
 
 CommunityProjects.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
