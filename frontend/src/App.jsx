@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 //
 import { connect } from 'react-redux';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Header from './Components/Header/Header';
 import './App.css';
 import { fetchUser } from './redux/auth';
@@ -14,6 +14,7 @@ import Login from './Components/Authentication/Login';
 import CreateProject from './Components/Projects/CreateProject';
 import Profile from './Components/UserProfile/Profile';
 import CommunityProjects from './Component/CommunityProjects/CommunityProjects';
+import Dashboard from './Components/Dashboard/Dashboard';
 
 class App extends Component {
   async componentDidMount() {
@@ -27,11 +28,14 @@ class App extends Component {
         <BrowserRouter>
           <div className="App">
             <Header />
+            <Dashboard />
+            <Switch>
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/create-project" component={CreateProject} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/communityprojects" component={CommunityProjects}
+            </Switch>
           </div>
         </BrowserRouter>
       </div>

@@ -1,26 +1,30 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'antd';
+
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import { logout } from '../../redux/auth';
-import { clearProjectData } from '../../redux/projects';
+
+import { FaPlus } from 'react-icons/fa'
 
 class Dashboard extends Component {
   state = {};
 
   render() {
-    const { user } = this.props;
 
     return (
       <div className="Dashboard">
-
-            <Link to="/create-project">Create New</Link>
+          <div>
+            <Link to="/create-project">New Project</Link>
+          </div>
+          <div>
             <Link to="/profile">Profile</Link>
+            </div>
+            <div>
             <Link to="/communityprojects">Community Projects</Link>
+            </div>
+            <div>
             <Link to="/">Your Projects</Link>
-
-
+            </div>
       </div>
     );
   }
