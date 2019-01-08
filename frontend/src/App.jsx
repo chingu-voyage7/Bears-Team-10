@@ -13,6 +13,7 @@ import Register from './Components/Authentication/Register';
 import Login from './Components/Authentication/Login';
 import CreateProject from './Components/Projects/CreateProject';
 import Profile from './Components/UserProfile/Profile';
+import CommunityProjects from './Component/CommunityProjects/CommunityProjects';
 
 class App extends Component {
   async componentDidMount() {
@@ -30,6 +31,7 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/create-project" component={CreateProject} />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/communityprojects" component={CommunityProjects}
           </div>
         </BrowserRouter>
       </div>
