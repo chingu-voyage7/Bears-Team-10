@@ -3,14 +3,44 @@ import PropTypes from 'prop-types';
 import Projects from './Projects';
 import './CommunityProjects.css';
 
-// for calling component use
-// <CommunityProjects allProjects={allProjects} />
+
+// for calling this component and the CommunityPosts (switching between
+// them with onClick) use:
+// {(() => {
+//   switch (displayPosts) {
+//     case true:
+//       return (
+//         <CommunityPosts
+//           displayPosts={displayPosts}
+//           onClickPosts={onClickPosts}
+//         />
+//       );
+//     default:
+//       return (
+//         <CommunityProjects
+//           allProjects={allProjects}
+//           displayPosts={displayPosts}
+//           onClickPosts={onClickPosts}
+//         />
+//       );
+//   }
+// })()}
+// in Dashboard Component
+//
 //  add:     allProjects: state.projects.allProjects
 //  to mapStateToProps
+//  in Dashboard Component
+//
+// add:
+// displayPosts={this.state.displayPosts}
+// onClickPosts={this.onClickPosts}
+// as props for Dashboard Component
 
+// eslint-disable-next-line react/prefer-stateless-function
 class CommunityProjects extends Component {
   render() {
-    const { allProjects } = this.props;
+    const { allProjects, onClickPosts, displayPosts } = this.props;
+
     return (
       <div className="contentContainer">
         <div className="contentAndTitles">
@@ -24,7 +54,10 @@ class CommunityProjects extends Component {
                 id={project.project_id}
                 title={project.project_title}
                 desc={project.project_description}
-                setRedirect={this.setRedirect}
+
+                onClickPosts={onClickPosts}
+                displayPosts={displayPosts}
+
               />
             ))}
           </div>
@@ -37,6 +70,10 @@ class CommunityProjects extends Component {
 CommunityProjects.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   allProjects: PropTypes.array.isRequired,
+
+  onClickPosts: PropTypes.func.isRequired,
+  displayPosts: PropTypes.bool.isRequired,
+
 };
 
 export default CommunityProjects;
