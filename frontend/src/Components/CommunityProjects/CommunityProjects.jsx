@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Projects from './Projects';
 import './CommunityProjects.css';
 
+
 // for calling this component and the CommunityPosts (switching between
 // them with onClick) use:
 // {(() => {
@@ -39,6 +40,7 @@ import './CommunityProjects.css';
 class CommunityProjects extends Component {
   render() {
     const { allProjects, onClickPosts, displayPosts } = this.props;
+
     return (
       <div className="contentContainer">
         <div className="contentAndTitles">
@@ -52,8 +54,10 @@ class CommunityProjects extends Component {
                 id={project.project_id}
                 title={project.project_title}
                 desc={project.project_description}
+
                 onClickPosts={onClickPosts}
                 displayPosts={displayPosts}
+
               />
             ))}
           </div>
@@ -66,8 +70,10 @@ class CommunityProjects extends Component {
 CommunityProjects.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   allProjects: PropTypes.array.isRequired,
+
   onClickPosts: PropTypes.func.isRequired,
   displayPosts: PropTypes.bool.isRequired,
+
 };
 
 export default CommunityProjects;

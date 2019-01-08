@@ -1,3 +1,4 @@
+
 .projectTitle {
   font-size: 2.5vw;
 	font-weight: bold;
@@ -9,7 +10,7 @@
 .projectDescription {
 	font-size: 2vw;
 	margin: 1vw;
-}
+
 
 .projectText {
   position: relative;
@@ -48,3 +49,4 @@
 .button {
   background-color: #FF784E;
 }
+
