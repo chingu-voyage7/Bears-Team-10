@@ -9,6 +9,7 @@ class Projects extends React.Component {
     return (
       <div className="project">
         <div className="projectText" role="presentation" onClick={onClickPosts}>
+
           <div className="projectTitle">
             <span>{title}</span>
           </div>
