@@ -3,4 +3,5 @@ module.exports = router => {
   router.use('/users', require('./users'))
   router.use('/auth', require('./auth'))
   router.use('/projects', require('./projects'))
+  router.use('/posts', require('./posts'))
 }

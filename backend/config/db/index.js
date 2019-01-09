@@ -68,6 +68,24 @@ const queries = {
     const result = await pool.query("SELECT * FROM PROJECTS");
     return result.rows;
   },
+  newPost: async (
+    post_id,
+    project_id,
+    post_creator_user_id,
+    post_content,
+    creation_timestamp
+  ) => {
+    const result = await pool.query(
+      "INSERT INTO POSTS VALUES ($1, $2, $3, $4, $5) RETURNING *",
+      [post_id, project_id, post_creator_user_id, post_content, creation_timestamp]
+    );
+    console.log(result);
+    return result.rows[0];
+  },
+  fetchPosts: async () => {
+    const result = await pool.query("SELECT * FROM POSTS WHERE project_id = $2");
+    return result.rows;
+  },
 };
 
 module.exports = {
