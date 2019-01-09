@@ -10,6 +10,7 @@ import { fetchProjects } from './redux/projects';
 import Register from './Components/Authentication/Register';
 import Login from './Components/Authentication/Login';
 import CreateProject from './Components/Projects/CreateProject';
+import NewPost from './Components/CommunityPosts/NewPost';
 import Profile from './Components/UserProfile/Profile';
 import CommunityProjects from './Components/CommunityProjects/CommunityProjects';
 import CommunityPosts from './Components/CommunityPosts/CommunityPosts';
@@ -46,6 +47,7 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/create-project" component={CreateProject} />
+            <Route exact path="/new-post" component={NewPost} />
             <Route exact path="/profile" component={Profile} />
             <Route
               exact

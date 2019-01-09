@@ -6,14 +6,12 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { logout } from '../../redux/auth';
 import { clearProjectData } from '../../redux/projects';
-import CommunityPosts from '../CommunityPosts/CommunityPosts';
-import CommunityProjects from '../CommunityProjects/CommunityProjects';
 
 class Header extends Component {
   state = {};
 
   render() {
-    const { user, displayPosts, onClickPosts, allProjects } = this.props;
+    const { user } = this.props;
 
     return (
       <div className="header-div">
@@ -40,25 +38,6 @@ class Header extends Component {
               >
                 <span> Logout?</span>
               </Button>
-              {(() => {
-                switch (displayPosts) {
-                  case true:
-                    return (
-                      <CommunityPosts
-                        displayPosts={displayPosts}
-                        onClickPosts={onClickPosts}
-                      />
-                    );
-                  default:
-                    return (
-                      <CommunityProjects
-                        allProjects={allProjects}
-                        displayPosts={displayPosts}
-                        onClickPosts={onClickPosts}
-                      />
-                    );
-                }
-              })()}
             </span>
           ) : (
             <Link to="/login">Sign In</Link>
@@ -72,7 +51,6 @@ class Header extends Component {
 function mapStateToProps(state) {
   return {
     user: state.auth.user,
-    allProjects: state.projects.allProjects,
   };
 }
 
@@ -81,10 +59,6 @@ Header.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   user: PropTypes.object.isRequired,
   logout: PropTypes.func.isRequired,
-  displayPosts: PropTypes.func.isRequired,
-  onClickPosts: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  allProjects: PropTypes.object.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   history: PropTypes.object.isRequired,
 };

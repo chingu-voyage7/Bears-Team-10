@@ -4,7 +4,7 @@ const Ctrl = require("../controllers/posts");
 const requireAuth = require("../controllers/auth").requireAuth;
 
 router.get("/fetchPosts", requireAuth, Ctrl.fetchPosts);
-router.post("/createPost", requireAuth, Ctrl.createPost);
+router.post("/newPost", requireAuth, Ctrl.newPost);
 
 
 module.exports = router.routes();

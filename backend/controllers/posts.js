@@ -1,12 +1,12 @@
 const db = require("../config/db");
 const uuid_v4 = require('uuid/v4')
 
-async function createPost(ctx) {
-  const projectId = uuid_v4();
+async function newPost(ctx) {
+  const postId = uuid_v4();
   const currentDate = new Date()
-  const createdPost = await db.createPostt(
+  const createdPost = await db.newPost(
     postId,
-    projectId,
+    ctx.state.projectId,
     ctx.state.user.id,
     ctx.request.body.postContent,
     currentDate
@@ -28,6 +28,6 @@ async function fetchPosts(ctx) {
 }
 
 module.exports = {
-  createPost,
+  newPost,
   fetchPosts
 };

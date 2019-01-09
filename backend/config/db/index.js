@@ -68,7 +68,7 @@ const queries = {
     const result = await pool.query("SELECT * FROM PROJECTS");
     return result.rows;
   },
-  createPost: async (
+  newPost: async (
     post_id,
     project_id,
     post_creator_user_id,
