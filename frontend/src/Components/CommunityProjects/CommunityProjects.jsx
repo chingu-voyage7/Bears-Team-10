@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Projects from './Projects';
+import { connect } from 'react-redux';
 import './CommunityProjects.css';
 
 // for calling component use
@@ -18,15 +19,17 @@ class CommunityProjects extends Component {
             <span> Project List </span>
           </div>
           <div className="projectList">
-            {allProjects.map(project => (
-              <Projects
-                key={project.project_id}
-                id={project.project_id}
-                title={project.project_title}
-                desc={project.project_description}
-                setRedirect={this.setRedirect}
-              />
-            ))}
+            {allProjects.length
+              ? allProjects.map(project => (
+                  <Projects
+                    key={project.project_id}
+                    id={project.project_id}
+                    title={project.project_title}
+                    desc={project.project_description}
+                    setRedirect={this.setRedirect}
+                  />
+                ))
+              : 'Nothing here'}
           </div>
         </div>
       </div>
@@ -39,4 +42,13 @@ CommunityProjects.propTypes = {
   allProjects: PropTypes.array.isRequired,
 };
 
-export default CommunityProjects;
+function mapStateToProps(state) {
+  return {
+    allProjects: state.projects.allProjects,
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)(CommunityProjects);

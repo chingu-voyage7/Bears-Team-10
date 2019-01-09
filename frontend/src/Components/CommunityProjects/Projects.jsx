@@ -4,18 +4,6 @@ import PropTypes from 'prop-types';
 import './Projects.css';
 
 class Projects extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   // this.onClickPosts = this.onClickPosts.bind(this);
-  // }
-
-  // onClickPosts() {
-  //   // const index = parseInt(this.index, 10);
-  //   this.setState({
-  //     posts: true
-  //   });
-  // }
-
   render() {
     const { title, desc } = this.props;
     return (
@@ -32,7 +20,6 @@ class Projects extends React.Component {
           <div className="projectDescription">
             <span>{desc}</span>
           </div>
-          Click to show posts
         </div>
       </div>
     );
