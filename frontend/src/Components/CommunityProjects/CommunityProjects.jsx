@@ -45,7 +45,7 @@ const CommunityProjects = ({ allProjects, onClickPosts, displayPosts }) => (
         {allProjects.map(project => (
           <Projects
             key={project.project_id}
-            id={project.project_id}
+            projectId={project.project_id}
             title={project.project_title}
             desc={project.project_description}
             onClickPosts={onClickPosts}

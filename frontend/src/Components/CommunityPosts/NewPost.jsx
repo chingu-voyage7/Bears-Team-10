@@ -13,12 +13,17 @@ class NewPost extends Component {
     this.props.form.validateFields((err, value) => {
       if (!err) {
         const { postContent } = value;
-        this.props.newPost(postContent, () => this.props.history.push('/'));
+        this.props.newPost(postContent, () =>
+          this.props.history.push('/new-post')
+        );
       }
     });
   };
 
   render() {
+    const {
+      form: { getFieldDecorator },
+    } = this.props;
     return (
       <div className="form center pa4 br3 shadow-5">
         <Form onSubmit={this.handleSubmit} className="create-post-form">
@@ -27,11 +32,13 @@ class NewPost extends Component {
             wrapperCol={{ span: 19 }}
             label="New Post"
           >
-            <Input.TextArea
-              className="newPost"
-              onChange={this.handleChange}
-              autosize={{ minRows: 5, maxRows: 25 }}
-            />
+            {getFieldDecorator('postContent')(
+              <Input.TextArea
+                className="newPost"
+                onChange={this.handleChange}
+                autosize={{ minRows: 5, maxRows: 25 }}
+              />
+            )}
           </FormItem>
           <FormItem>
             <Button type="primary" htmlType="submit">

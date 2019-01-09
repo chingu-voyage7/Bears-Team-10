@@ -55,6 +55,7 @@ class Header extends Component {
                       allProjects={allProjects}
                       displayPosts={displayPosts}
                       onClickPosts={onClickPosts}
+                      user={user}
                     />
                   );
               }

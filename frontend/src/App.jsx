@@ -20,6 +20,7 @@ class App extends Component {
     super();
     this.state = {
       displayPosts: false,
+      // projectId: '',
     };
     this.onClickPosts = this.onClickPosts.bind(this);
   }
@@ -29,9 +30,10 @@ class App extends Component {
     this.props.fetchProjects();
   }
 
-  onClickPosts() {
+  onClickPosts(projectId) {
     this.setState(prevState => ({
       displayPosts: !prevState.displayPosts,
+      projectId,
     }));
   }
 
