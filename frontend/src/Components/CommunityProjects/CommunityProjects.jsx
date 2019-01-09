@@ -42,16 +42,18 @@ const CommunityProjects = ({ allProjects, onClickPosts, displayPosts }) => (
         <span> Project List </span>
       </div>
       <div className="projectList">
-        {allProjects.map(project => (
-          <Projects
-            key={project.project_id}
-            id={project.project_id}
-            title={project.project_title}
-            desc={project.project_description}
-            onClickPosts={onClickPosts}
-            displayPosts={displayPosts}
-          />
-        ))}
+        {allProjects
+          ? allProjects.map(project => (
+              <Projects
+                key={project.project_id}
+                id={project.project_id}
+                title={project.project_title}
+                desc={project.project_description}
+                onClickPosts={onClickPosts}
+                displayPosts={displayPosts}
+              />
+            ))
+          : 'Nothing here'}
       </div>
     </div>
   </div>
