@@ -12,7 +12,7 @@ class Dashboard extends Component {
   state = {};
 
   render() {
-    const { displayPosts, allProjects } = this.props;
+    const { displayPosts, allProjects, onClickPosts } = this.props;
     return (
       <div className="Dashboard">
         <div>
@@ -59,9 +59,9 @@ function mapStateToProps(state) {
 }
 
 Dashboard.propTypes = {
-  // clearProjectData: PropTypes.func.isRequired,
+  onClickPosts: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
-  allProjects: PropTypes.object.isRequired,
+  allProjects: PropTypes.array.isRequired,
   displayPosts: PropTypes.bool.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   // history: PropTypes.object.isRequired,

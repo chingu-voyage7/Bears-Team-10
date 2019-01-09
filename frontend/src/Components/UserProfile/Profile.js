@@ -214,7 +214,8 @@ const mapDispatchToProps = dispatch => ({
 Profile.propTypes = {
   fetchUserProfile: PropTypes.func.isRequired,
   updateProfileComponent: PropTypes.func.isRequired,
-  profile: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  profile: PropTypes.object.isRequired,
 };
 //
 
