@@ -15,12 +15,14 @@ class Projects extends React.Component {
             onClickPosts(projectId);
           }}
         >
-
           <div className="projectTitle">
             <span>{title}</span>
           </div>
           <div className="projectDescription">
             <span>{desc}</span>
+          </div>
+          <div className="projectId">
+            <span>{projectId}</span>
           </div>
           Click to show posts
         </div>

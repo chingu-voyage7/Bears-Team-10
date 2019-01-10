@@ -11,18 +11,20 @@ export const fetchPosts = () => async dispatch => {
   dispatch({ type: FETCH_POSTS, value: res.data.allPosts });
 };
 
-export const removePosts = () => {
-  return {
-    type: FETCH_POSTS,
-    value: '',
-  };
-};
+export const removePosts = () => ({
+  type: FETCH_POSTS,
+  value: '',
+});
 
-export const newPost = (postContent, redirectOnSuccess) => async dispatch => {
+export const newPost = (
+  postContent,
+  projectId,
+  redirectOnSuccess
+) => async dispatch => {
   try {
     const res = await axios('/api/posts/newPost', {
       method: 'post',
-      data: { postContent },
+      data: { postContent, projectId },
     });
     if (res.status === 200) {
       const posts = await axios.get('/api/posts/fetchPosts');
@@ -34,12 +36,10 @@ export const newPost = (postContent, redirectOnSuccess) => async dispatch => {
   }
 };
 
-export const clearPostData = () => {
-  return {
-    type: CLEAR_POST_DATA,
-    value: initialState.allPosts,
-  };
-};
+export const clearPostData = () => ({
+  type: CLEAR_POST_DATA,
+  value: initialState.allPosts,
+});
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {

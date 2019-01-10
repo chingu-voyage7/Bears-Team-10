@@ -4,7 +4,7 @@ import ProjectPosts from './ProjectPosts';
 import NewPost from './NewPost';
 import { posts } from '../../posts';
 
-const CommunityPosts = ({ onClickPosts }) => (
+const CommunityPosts = ({ onClickPosts, projectId }) => (
   <div className="contentContainer">
     <div className="contentAndTitles">
       <div className="projectTitle" role="presentation" onClick={onClickPosts}>
@@ -22,7 +22,7 @@ const CommunityPosts = ({ onClickPosts }) => (
             date={post.date}
           />
         ))}
-        <NewPost />
+        <NewPost projectId={projectId} />
       </div>
     </div>
   </div>
@@ -30,6 +30,7 @@ const CommunityPosts = ({ onClickPosts }) => (
 
 CommunityPosts.propTypes = {
   onClickPosts: PropTypes.func.isRequired,
+  projectId: PropTypes.string.isRequired,
 };
 
 export default CommunityPosts;

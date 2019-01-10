@@ -10,10 +10,10 @@ const { Item: FormItem } = Form;
 class NewPost extends Component {
   handleSubmit = async e => {
     e.preventDefault();
-    this.props.form.validateFields((err, value) => {
+    this.props.form.validateFields((err, values) => {
       if (!err) {
-        const { postContent } = value;
-        this.props.newPost(postContent, () =>
+        const { postContent } = values;
+        this.props.newPost(postContent, this.props.projectId, () =>
           this.props.history.push('/new-post')
         );
       }
@@ -46,14 +46,6 @@ class NewPost extends Component {
             </Button>
           </FormItem>
         </Form>
-        {/* <textarea className="newPost" />
-        <button
-          className="submit button"
-          type="button"
-          onClick={this.onButtonSubmit}
-        >
-          Submit Post
-        </button> */}
       </div>
     );
   }
@@ -67,6 +59,7 @@ NewPost.propTypes = {
   form: PropTypes.object.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   history: PropTypes.object.isRequired,
+  projectId: PropTypes.string.isRequired,
 };
 
 // export default NewPost;

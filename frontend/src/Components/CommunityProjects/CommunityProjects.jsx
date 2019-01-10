@@ -12,6 +12,7 @@ import './CommunityProjects.css';
 //         <CommunityPosts
 //           displayPosts={displayPosts}
 //           onClickPosts={onClickPosts}
+//           projectId={projectId}
 //         />
 //       );
 //     default:
@@ -20,6 +21,7 @@ import './CommunityProjects.css';
 //           allProjects={allProjects}
 //           displayPosts={displayPosts}
 //           onClickPosts={onClickPosts}
+//           user={user}
 //         />
 //       );
 //   }
@@ -33,7 +35,8 @@ import './CommunityProjects.css';
 // add:
 // displayPosts={this.state.displayPosts}
 // onClickPosts={this.onClickPosts}
-// as props for Dashboard Component
+// projectId={this.state.projectId}
+// as props for Dashboard Component in App.jsx
 
 const CommunityProjects = ({ allProjects, onClickPosts, displayPosts }) => (
   <div className="contentContainer">

@@ -6,7 +6,7 @@ import Header from './Components/Header/Header';
 import './App.css';
 import { fetchUser } from './redux/auth';
 import { fetchProjects } from './redux/projects';
-
+import { fetchPosts } from './redux/posts';
 import Register from './Components/Authentication/Register';
 import Login from './Components/Authentication/Login';
 import CreateProject from './Components/Projects/CreateProject';
@@ -20,7 +20,7 @@ class App extends Component {
     super();
     this.state = {
       displayPosts: false,
-      // projectId: '',
+      projectId: '',
     };
     this.onClickPosts = this.onClickPosts.bind(this);
   }
@@ -33,8 +33,9 @@ class App extends Component {
   onClickPosts(projectId) {
     this.setState(prevState => ({
       displayPosts: !prevState.displayPosts,
-      projectId,
     }));
+    this.setState({ projectId });
+    this.props.fetchPosts(projectId);
   }
 
   render() {
@@ -45,6 +46,7 @@ class App extends Component {
             <Header
               displayPosts={this.state.displayPosts}
               onClickPosts={this.onClickPosts}
+              projectId={this.state.projectId}
             />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
@@ -67,9 +69,10 @@ class App extends Component {
 App.propTypes = {
   fetchUser: PropTypes.func.isRequired,
   fetchProjects: PropTypes.func.isRequired,
+  fetchPosts: PropTypes.func.isRequired,
 };
 
 export default connect(
   null,
-  { fetchUser, fetchProjects }
+  { fetchUser, fetchProjects, fetchPosts }
 )(App);

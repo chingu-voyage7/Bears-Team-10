@@ -13,8 +13,13 @@ class Header extends Component {
   state = {};
 
   render() {
-    const { user, displayPosts, onClickPosts, allProjects } = this.props;
-
+    const {
+      user,
+      displayPosts,
+      onClickPosts,
+      allProjects,
+      projectId,
+    } = this.props;
     return (
       <div className="header-div">
         <div className="logo">
@@ -47,6 +52,7 @@ class Header extends Component {
                     <CommunityPosts
                       displayPosts={displayPosts}
                       onClickPosts={onClickPosts}
+                      projectId={projectId}
                     />
                   );
                 default:
@@ -88,6 +94,7 @@ Header.propTypes = {
   allProjects: PropTypes.array.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   history: PropTypes.object.isRequired,
+  projectId: PropTypes.string.isRequired,
 };
 
 export default withRouter(
