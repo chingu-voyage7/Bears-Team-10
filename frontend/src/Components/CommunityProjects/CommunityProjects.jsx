@@ -38,7 +38,12 @@ import './CommunityProjects.css';
 // projectId={this.state.projectId}
 // as props for Dashboard Component in App.jsx
 
-const CommunityProjects = ({ allProjects, onClickPosts, displayPosts }) => (
+const CommunityProjects = ({
+  // user,
+  allProjects,
+  onClickPosts,
+  displayPosts,
+}) => (
   <div className="contentContainer">
     <div className="contentAndTitles">
       <div className="projectsTitle">
@@ -53,6 +58,7 @@ const CommunityProjects = ({ allProjects, onClickPosts, displayPosts }) => (
             desc={project.project_description}
             onClickPosts={onClickPosts}
             displayPosts={displayPosts}
+            // user={user}
           />
         ))}
       </div>
@@ -65,6 +71,8 @@ CommunityProjects.propTypes = {
   allProjects: PropTypes.array.isRequired,
   onClickPosts: PropTypes.func.isRequired,
   displayPosts: PropTypes.bool.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  // user: PropTypes.object.isRequired,
 };
 
 export default CommunityProjects;

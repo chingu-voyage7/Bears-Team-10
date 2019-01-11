@@ -46,7 +46,7 @@ export default function reducer(state = initialState, action) {
     case FETCH_POSTS:
       return { ...state, allPosts: action.value };
     case CLEAR_POST_DATA:
-      return { ...state, allProjects: action.value };
+      return { ...state, allPosts: action.value };
     default:
       return state;
   }

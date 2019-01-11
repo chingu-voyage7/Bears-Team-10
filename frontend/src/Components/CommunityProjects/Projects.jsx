@@ -12,7 +12,7 @@ class Projects extends React.Component {
           className="projectText"
           role="presentation"
           onClick={() => {
-            onClickPosts(projectId);
+            onClickPosts(projectId, title, desc);
           }}
         >
           <div className="projectTitle">
@@ -20,9 +20,6 @@ class Projects extends React.Component {
           </div>
           <div className="projectDescription">
             <span>{desc}</span>
-          </div>
-          <div className="projectId">
-            <span>{projectId}</span>
           </div>
           Click to show posts
         </div>

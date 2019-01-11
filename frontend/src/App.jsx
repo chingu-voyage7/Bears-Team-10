@@ -21,6 +21,8 @@ class App extends Component {
     this.state = {
       displayPosts: false,
       projectId: '',
+      title: '',
+      desc: '',
     };
     this.onClickPosts = this.onClickPosts.bind(this);
   }
@@ -30,12 +32,12 @@ class App extends Component {
     this.props.fetchProjects();
   }
 
-  onClickPosts(projectId) {
+  onClickPosts(projectId, title, desc) {
     this.setState(prevState => ({
       displayPosts: !prevState.displayPosts,
     }));
-    this.setState({ projectId });
-    this.props.fetchPosts(projectId);
+    this.setState({ projectId, title, desc });
+    this.props.fetchPosts();
   }
 
   render() {
@@ -47,6 +49,8 @@ class App extends Component {
               displayPosts={this.state.displayPosts}
               onClickPosts={this.onClickPosts}
               projectId={this.state.projectId}
+              title={this.state.title}
+              desc={this.state.desc}
             />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />

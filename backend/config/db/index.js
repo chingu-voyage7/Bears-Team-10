@@ -82,8 +82,9 @@ const queries = {
     console.log(result);
     return result.rows[0];
   },
-  fetchPosts: async () => {
-    const result = await pool.query("SELECT * FROM POSTS WHERE project_id = $2");
+  
+  fetchPosts: async projectId => {
+    const result = await pool.query("SELECT * FROM POSTS");
     return result.rows;
   },
 };

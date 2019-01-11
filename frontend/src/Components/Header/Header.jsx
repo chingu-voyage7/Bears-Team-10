@@ -18,7 +18,10 @@ class Header extends Component {
       displayPosts,
       onClickPosts,
       allProjects,
+      allPosts,
       projectId,
+      title,
+      desc,
     } = this.props;
     return (
       <div className="header-div">
@@ -53,6 +56,9 @@ class Header extends Component {
                       displayPosts={displayPosts}
                       onClickPosts={onClickPosts}
                       projectId={projectId}
+                      title={title}
+                      desc={desc}
+                      allPosts={allPosts}
                     />
                   );
                 default:
@@ -61,7 +67,7 @@ class Header extends Component {
                       allProjects={allProjects}
                       displayPosts={displayPosts}
                       onClickPosts={onClickPosts}
-                      user={user}
+                      username={user.user.username}
                     />
                   );
               }
@@ -80,6 +86,7 @@ function mapStateToProps(state) {
   return {
     user: state.auth.user,
     allProjects: state.projects.allProjects,
+    allPosts: state.posts.allPosts,
   };
 }
 
@@ -93,8 +100,12 @@ Header.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   allProjects: PropTypes.array.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
+  allPosts: PropTypes.array.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   history: PropTypes.object.isRequired,
   projectId: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  desc: PropTypes.string.isRequired,
 };
 
 export default withRouter(
