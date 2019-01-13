@@ -68,6 +68,19 @@ const queries = {
     const result = await pool.query("SELECT * FROM PROJECTS");
     return result.rows;
   },
+
+  addCollaborator: async (project_id, collaboratorUsername) => {
+    try {
+      const result = await pool.query(`
+    INSERT INTO PROJECT_COLLABORATOR_XREF SELECT $1, id FROM USERS WHERE USERNAME=$2 RETURNING *
+    `,
+    [project_id, collaboratorUsername]);
+    return result.rows.length;
+  }
+    catch (error) {
+      return error.code;
+    }
+  }
 };
 
 module.exports = {
