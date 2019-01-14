@@ -12,6 +12,7 @@ import './CommunityProjects.css';
 //         <CommunityPosts
 //           displayPosts={displayPosts}
 //           onClickPosts={onClickPosts}
+//           projectId={projectId}
 //         />
 //       );
 //     default:
@@ -20,6 +21,7 @@ import './CommunityProjects.css';
 //           allProjects={allProjects}
 //           displayPosts={displayPosts}
 //           onClickPosts={onClickPosts}
+//           user={user}
 //         />
 //       );
 //   }
@@ -33,9 +35,15 @@ import './CommunityProjects.css';
 // add:
 // displayPosts={this.state.displayPosts}
 // onClickPosts={this.onClickPosts}
-// as props for Dashboard Component
+// projectId={this.state.projectId}
+// as props for Dashboard Component in App.jsx
 
-const CommunityProjects = ({ allProjects, onClickPosts, displayPosts }) => (
+const CommunityProjects = ({
+  // user,
+  allProjects,
+  onClickPosts,
+  displayPosts,
+}) => (
   <div className="contentContainer">
     <div className="contentAndTitles">
       <div className="projectsTitle">
@@ -45,11 +53,12 @@ const CommunityProjects = ({ allProjects, onClickPosts, displayPosts }) => (
         {allProjects.map(project => (
           <Projects
             key={project.project_id}
-            id={project.project_id}
+            projectId={project.project_id}
             title={project.project_title}
             desc={project.project_description}
             onClickPosts={onClickPosts}
             displayPosts={displayPosts}
+            // user={user}
           />
         ))}
       </div>
@@ -62,6 +71,8 @@ CommunityProjects.propTypes = {
   allProjects: PropTypes.array.isRequired,
   onClickPosts: PropTypes.func.isRequired,
   displayPosts: PropTypes.bool.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  // user: PropTypes.object.isRequired,
 };
 
 export default CommunityProjects;

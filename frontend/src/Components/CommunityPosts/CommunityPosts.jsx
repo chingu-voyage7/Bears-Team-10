@@ -2,27 +2,40 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ProjectPosts from './ProjectPosts';
 import NewPost from './NewPost';
-import { posts } from '../../posts';
+// import { posts } from '../../posts';
 
-const CommunityPosts = ({ onClickPosts }) => (
+const CommunityPosts = ({
+  allPosts,
+  onClickPosts,
+  projectId,
+  // user,
+  title,
+  desc,
+}) => (
   <div className="contentContainer">
     <div className="contentAndTitles">
-      <div className="projectTitle" role="presentation" onClick={onClickPosts}>
+      <div
+        className="projectTitle"
+        role="presentation"
+        onClick={() => {
+          onClickPosts(projectId, title, desc);
+        }}
+      >
         <span>Click to hide posts</span>
       </div>
-      <div className="projectTitle">{posts[0].title}</div>
-      <div className="projectDescription">{posts[0].desc}</div>
+      <div className="projectTitle">{title}</div>
+      <div className="projectDescription">{desc}</div>
       <div className="postList">
-        {posts[0].posts.map(post => (
+        {allPosts.map(post => (
           <ProjectPosts
-            key={post.id}
-            id={post.id}
-            name={post.name}
-            message={post.message}
-            date={post.date}
+            key={post.post_id}
+            id={post.post_id}
+            name={post.post_creator_user_id}
+            message={post.post_content}
+            date={post.creation_timestamp}
           />
         ))}
-        <NewPost />
+        <NewPost projectId={projectId} />
       </div>
     </div>
   </div>
@@ -30,6 +43,13 @@ const CommunityPosts = ({ onClickPosts }) => (
 
 CommunityPosts.propTypes = {
   onClickPosts: PropTypes.func.isRequired,
+  projectId: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  allPosts: PropTypes.array.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  // user: PropTypes.object.isRequired,
+  title: PropTypes.string.isRequired,
+  desc: PropTypes.string.isRequired,
 };
 
 export default CommunityPosts;
