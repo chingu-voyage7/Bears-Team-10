@@ -39,7 +39,7 @@ class App extends Component {
       displayPosts: !prevState.displayPosts,
     }));
     this.setState({ projectId, title, desc });
-    this.props.fetchPosts();
+    this.props.fetchPosts(projectId);
   }
 
   render() {

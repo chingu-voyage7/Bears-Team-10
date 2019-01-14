@@ -20,7 +20,9 @@ async function newPost(ctx) {
 }
 
 async function fetchPosts(ctx) {
-  const allPosts = await db.fetchPosts();
+  projectId = ctx.request.body.projectId,
+  console.log(projectId);
+  const allPosts = await db.fetchPosts(projectId);
   ctx.send(200, {
     message: "All Posts for current Project",
     allPosts
