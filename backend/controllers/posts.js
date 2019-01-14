@@ -6,7 +6,7 @@ async function newPost(ctx) {
   const currentDate = new Date()
   const createdPost = await db.newPost(
     postId,
-    ctx.state.projectId,
+    ctx.request.body.projectId,
     ctx.state.user.id,
     ctx.request.body.postContent,
     currentDate

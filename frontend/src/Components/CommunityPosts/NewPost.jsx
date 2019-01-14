@@ -10,15 +10,20 @@ const { Item: FormItem } = Form;
 class NewPost extends Component {
   handleSubmit = async e => {
     e.preventDefault();
-    this.props.form.validateFields((err, value) => {
+    this.props.form.validateFields((err, values) => {
       if (!err) {
-        const { postContent } = value;
-        this.props.newPost(postContent, () => this.props.history.push('/'));
+        const { postContent } = values;
+        this.props.newPost(postContent, this.props.projectId, () =>
+          this.props.history.push('/new-post')
+        );
       }
     });
   };
 
   render() {
+    const {
+      form: { getFieldDecorator },
+    } = this.props;
     return (
       <div className="form center pa4 br3 shadow-5">
         <Form onSubmit={this.handleSubmit} className="create-post-form">
@@ -27,11 +32,13 @@ class NewPost extends Component {
             wrapperCol={{ span: 19 }}
             label="New Post"
           >
-            <Input.TextArea
-              className="newPost"
-              onChange={this.handleChange}
-              autosize={{ minRows: 5, maxRows: 25 }}
-            />
+            {getFieldDecorator('postContent')(
+              <Input.TextArea
+                className="newPost"
+                onChange={this.handleChange}
+                autosize={{ minRows: 5, maxRows: 25 }}
+              />
+            )}
           </FormItem>
           <FormItem>
             <Button type="primary" htmlType="submit">
@@ -39,14 +46,6 @@ class NewPost extends Component {
             </Button>
           </FormItem>
         </Form>
-        {/* <textarea className="newPost" />
-        <button
-          className="submit button"
-          type="button"
-          onClick={this.onButtonSubmit}
-        >
-          Submit Post
-        </button> */}
       </div>
     );
   }
@@ -60,6 +59,7 @@ NewPost.propTypes = {
   form: PropTypes.object.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   history: PropTypes.object.isRequired,
+  projectId: PropTypes.string.isRequired,
 };
 
 // export default NewPost;
