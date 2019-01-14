@@ -6,9 +6,10 @@ const initialState = {
   allPosts: [],
 };
 
-export const fetchPosts = () => async dispatch => {
+export const fetchPosts = projectId => async dispatch => {
+  console.log(projectId);
   const res = await axios.get('/api/posts/fetchPosts');
-  dispatch({ type: FETCH_POSTS, value: res.data.allPosts });
+  dispatch({ type: FETCH_POSTS, value: res.data.allPosts, projectId });
 };
 
 export const removePosts = () => ({

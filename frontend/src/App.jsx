@@ -12,7 +12,9 @@ import Login from './Components/Authentication/Login';
 import CreateProject from './Components/Projects/CreateProject';
 import NewPost from './Components/CommunityPosts/NewPost';
 import Profile from './Components/UserProfile/Profile';
+
 import CommunityProjects from './Components/CommunityProjects/CommunityProjects';
+import Dashboard from './Components/Dashboard/Dashboard';
 import CommunityPosts from './Components/CommunityPosts/CommunityPosts';
 
 class App extends Component {
@@ -37,7 +39,7 @@ class App extends Component {
       displayPosts: !prevState.displayPosts,
     }));
     this.setState({ projectId, title, desc });
-    this.props.fetchPosts();
+    this.props.fetchPosts(projectId);
   }
 
   render() {
@@ -45,7 +47,8 @@ class App extends Component {
       <div>
         <BrowserRouter>
           <div className="App">
-            <Header
+            <Header />
+            <Dashboard
               displayPosts={this.state.displayPosts}
               onClickPosts={this.onClickPosts}
               projectId={this.state.projectId}
