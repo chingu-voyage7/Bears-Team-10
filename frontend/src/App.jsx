@@ -47,16 +47,13 @@ class App extends Component {
       <div>
         <BrowserRouter>
           <div className="App">
-            <Header
+            <Header />
+            <Dashboard
               displayPosts={this.state.displayPosts}
               onClickPosts={this.onClickPosts}
               projectId={this.state.projectId}
               title={this.state.title}
               desc={this.state.desc}
-            />
-            <Dashboard
-              displayPosts={this.state.displayPosts}
-              onClickPosts={this.onClickPosts}
             />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
