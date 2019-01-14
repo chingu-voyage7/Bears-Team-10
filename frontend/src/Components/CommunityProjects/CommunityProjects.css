@@ -1,6 +1,14 @@
-.projectsTitle {
-  font-size: 4vw;
-  margin: 2vw 2vw;
+.projectTitle {
+  font-size: 2.5vw;
+	font-weight: bold;
+	color: #000000;
+	margin: 1vw 0;
+  margin-top: 0;
+}
+
+.projectDescription {
+	font-size: 2vw;
+	margin: 1vw;
 }
 
 .projectText {
@@ -30,4 +38,13 @@
   align-items: center;
   width: 98%;
   margin: auto;
+}
+
+.newPost {
+  height: 50px;
+  width: 90vw;
+}
+
+.button {
+  background-color: #FF784E;
 }
