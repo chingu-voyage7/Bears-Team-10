@@ -15,13 +15,15 @@ class Header extends Component {
 
     return (
       <div className="header-div">
+        <div className="header-home">
+        <Link to="/main">
+          <h1 className="header-title">Home</h1>
+        </Link>
+        </div>
         <div className="logo">
           <FaPaw />
-          <Link to="/">
-            <h1 className="header-title">Bairs</h1>
-          </Link>
         </div>
-        <p>
+        <div>
           <span>Welcome! </span>
           {user && user.isLoggedIn ? (
             <span>
@@ -42,7 +44,7 @@ class Header extends Component {
           ) : (
             <Link to="/login">Sign In</Link>
           )}
-        </p>
+        </div>
       </div>
     );
   }
