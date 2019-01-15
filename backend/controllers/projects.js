@@ -19,6 +19,22 @@ async function createProject(ctx) {
   });
 }
 
+async function addCollaborator(ctx) {
+  const {request: {body: {projectId, collaboratorUsername}}} = ctx;
+  console.log(projectId, collaboratorUsername)
+  const addedCollaborator = await db.addCollaborator(projectId, collaboratorUsername);
+  console.log(addedCollaborator)
+  if (addedCollaborator==1) {
+    ctx.send(200, {
+      message: "Collaborator added",
+    });
+  } else {
+      ctx.send(500, {
+        message: "Couldn't add collaborator",
+      });
+  }
+}
+
 async function fetchProjects(ctx) {
   const allProjects = await db.fetchProjects();
   ctx.send(200, {
@@ -29,5 +45,6 @@ async function fetchProjects(ctx) {
 
 module.exports = {
   createProject,
-  fetchProjects
+  fetchProjects,
+  addCollaborator
 };
