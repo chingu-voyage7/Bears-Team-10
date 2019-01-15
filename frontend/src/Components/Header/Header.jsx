@@ -15,11 +15,13 @@ class Header extends Component {
 
     return (
       <div className="header-div">
+        <div className="header-home">
+        <Link to="/main">
+          <h1 className="header-title">Home</h1>
+        </Link>
+        </div>
         <div className="logo">
           <FaPaw />
-          <Link to="/main">
-            <h1 className="header-title">Home</h1>
-          </Link>
         </div>
         <div>
           <span>Welcome! </span>
