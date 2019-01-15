@@ -14,6 +14,8 @@ import NewPost from './Components/CommunityPosts/NewPost';
 import Profile from './Components/UserProfile/Profile';
 import CommunityProjects from './Components/CommunityProjects/CommunityProjects';
 import CommunityPosts from './Components/CommunityPosts/CommunityPosts';
+import Projects from './Components/CommunityProjects/Projects';
+import Dashboard from './Components/Dashboard/Dashboard';
 
 class App extends Component {
   constructor() {
@@ -30,6 +32,7 @@ class App extends Component {
   async componentDidMount() {
     await this.props.fetchUser();
     this.props.fetchProjects();
+    this.props.fetchPosts();
   }
 
   onClickPosts(projectId, title, desc) {
@@ -45,18 +48,14 @@ class App extends Component {
       <div>
         <BrowserRouter>
           <div className="App">
-            <Header
-              displayPosts={this.state.displayPosts}
-              onClickPosts={this.onClickPosts}
-              projectId={this.state.projectId}
-              title={this.state.title}
-              desc={this.state.desc}
-            />
+            <Header />
+            <Route exact path="/main" component={Dashboard} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/create-project" component={CreateProject} />
             <Route exact path="/new-post" component={NewPost} />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/project/:project_id" component={Projects} />
             <Route
               exact
               path="/community-projects"

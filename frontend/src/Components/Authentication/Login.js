@@ -19,7 +19,7 @@ class Login extends Component {
         const { username, password } = values;
         await this.props.login(username, password);
         this.props.fetchProjects();
-        this.props.history.push('/');
+        this.props.history.push('/main');
       }
     });
   };
