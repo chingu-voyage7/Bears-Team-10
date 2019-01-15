@@ -75,11 +75,16 @@
   display: block;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Dashboard{
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+}
+
+.Dashboard div {
+  border-bottom: 1px solid grey;
+}
+
+.Dashboard div:hover{
+background: #eefdf5;
 }
