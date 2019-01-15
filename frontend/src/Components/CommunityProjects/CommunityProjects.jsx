@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Projects from './Projects';
 import './CommunityProjects.css';
@@ -41,8 +43,6 @@ import './CommunityProjects.css';
 const CommunityProjects = ({
   // user,
   allProjects,
-  onClickPosts,
-  displayPosts,
 }) => (
   <div className="contentContainer">
     <div className="contentAndTitles">
@@ -50,17 +50,13 @@ const CommunityProjects = ({
         <span> Project List </span>
       </div>
       <div className="projectList">
-        {allProjects.map(project => (
-          <Projects
-            key={project.project_id}
-            projectId={project.project_id}
-            title={project.project_title}
-            desc={project.project_description}
-            onClickPosts={onClickPosts}
-            displayPosts={displayPosts}
-            // user={user}
-          />
-        ))}
+        {allProjects.length
+          ? allProjects.map(project => (
+              <Link to={`/project/${project.project_id}`}>
+                <Projects project_id={project.project_id} />
+              </Link>
+            ))
+          : 'Nothing here'}
       </div>
     </div>
   </div>
@@ -69,10 +65,17 @@ const CommunityProjects = ({
 CommunityProjects.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   allProjects: PropTypes.array.isRequired,
-  onClickPosts: PropTypes.func.isRequired,
-  displayPosts: PropTypes.bool.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   // user: PropTypes.object.isRequired,
 };
 
-export default CommunityProjects;
+function mapStateToProps(state) {
+  return {
+    allProjects: state.projects.allProjects,
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  null
+)(CommunityProjects);
