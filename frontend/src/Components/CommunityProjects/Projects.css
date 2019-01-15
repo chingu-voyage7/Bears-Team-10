@@ -1,44 +1,44 @@
 .project {
-	width: 99%;
-	box-shadow: 0 .2vw .3vw 0 rgba(0, 0, 0, .3), 0 .2vw .3vw 0 rgba(0, 0, 0, .3);
-	transition: box-shadow .2s ease-in-out;
-	padding: 1vw;
-	margin-bottom: 2vw;
-  transition: opacity .2s ease-in-out;
+  display: flex;
+  width: 99%;
+  box-shadow: 0 0.2vw 0.3vw 0 rgba(0, 0, 0, 0.3),
+    0 0.2vw 0.3vw 0 rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.2s ease-in-out;
+  padding: 1vw;
+  margin-bottom: 2vw;
+  transition: opacity 0.2s ease-in-out;
 
   /* display: flex; */
   /* flex-direction: row; */
   align-items: center;
-	justify-content: baseline;
-	background-color: #737cb8bf;
-
+  justify-content: baseline;
+  background-color: #737cb8bf;
 }
 .project:hover {
-	box-shadow: 0 .5vw .5vw 0 rgba(0, 0, 0, 0.4), 0 .5vw .5vw 0 rgba(0, 0, 0, 0.4);
-	/* cursor: pointer; */
+  box-shadow: 0 0.5vw 0.5vw 0 rgba(0, 0, 0, 0.4),
+    0 0.5vw 0.5vw 0 rgba(0, 0, 0, 0.4);
+  /* cursor: pointer; */
 }
 
 .projectTitle span {
-	font-size: 2.5vw;
-	font-weight: bold;
-	color: #000000;
-	margin: 1vw;
-	transition: .2s color ease-in-out;
+  font-size: 2.5vw;
+  font-weight: bold;
+  color: #000000;
+  margin: 1vw;
+  transition: 0.2s color ease-in-out;
 }
 .projectTitle span:hover {
-	color: #051b7e;
-	text-decoration: underline;
-	cursor: pointer;
-
+  color: #051b7e;
+  text-decoration: underline;
+  cursor: pointer;
 }
 .projectDescription span {
-	font-size: 2vw;
-	margin: 1vw;
+  font-size: 2vw;
+  margin: 1vw;
 }
 
 .projectDescription span:hover {
-	color: #051b7e;
-	text-decoration: underline;
-	cursor: pointer;
-
+  color: #051b7e;
+  text-decoration: underline;
+  cursor: pointer;
 }

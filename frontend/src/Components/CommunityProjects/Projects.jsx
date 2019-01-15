@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './Projects.css';
+import WrappedAddCollaborator from './AddCollaborator';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Projects extends React.Component {
@@ -37,6 +38,12 @@ class Projects extends React.Component {
             ''
           )}
         </div>
+        {thisProject.length &&
+        this.props.user.user.id === thisProject[0].project_owner_user_id ? (
+          <WrappedAddCollaborator projectId={project_id} />
+        ) : (
+          ''
+        )}
       </div>
     );
   }
@@ -46,6 +53,7 @@ function mapStateToProps(state) {
   return {
     allPosts: state.posts.allPosts,
     allProjects: state.projects.allProjects,
+    user: state.auth.user,
   };
 }
 
