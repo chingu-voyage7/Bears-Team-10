@@ -76,13 +76,16 @@
 }
 
 .Dashboard{
-  display: flex;
-  justify-content: space-between;
-  padding: 1em;
+  display: grid;
+  grid-template-columns: 50vw 50vw;
+  grid-template-rows: 10vw 10vw;
+  grid-gap: .5em;
+  justify-items: center;
 }
 
 .Dashboard div {
-  border-bottom: 1px solid grey;
+  border: .2em solid grey;
+  width: 50vw;
 }
 
 .Dashboard div:hover{
