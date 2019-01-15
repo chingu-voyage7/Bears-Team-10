@@ -72,6 +72,7 @@
   grid-template-rows: 10vw 10vw;
   grid-gap: .5em;
   justify-items: center;
+  text-align: center;
 }
 
 .Dashboard div {
