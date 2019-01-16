@@ -16,6 +16,7 @@ import CommunityProjects from './Components/CommunityProjects/CommunityProjects'
 import CommunityPosts from './Components/CommunityPosts/CommunityPosts';
 import Projects from './Components/CommunityProjects/Projects';
 import Dashboard from './Components/Dashboard/Dashboard';
+import UserProjects from './Components/UserProjects/UserProjects';
 
 class App extends Component {
   constructor() {
@@ -62,6 +63,7 @@ class App extends Component {
               component={CommunityProjects}
             />
             <Route exact path="/community-posts" component={CommunityPosts} />
+            <Route exact path="/user-projects" component={UserProjects} />
           </div>
         </BrowserRouter>
       </div>

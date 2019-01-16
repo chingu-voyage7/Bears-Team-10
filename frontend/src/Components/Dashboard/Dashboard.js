@@ -15,16 +15,8 @@ class Dashboard extends Component {
             <Link to="/community-projects">Community Projects</Link>
             </div>
             <div>
-            <Link to="/">Your Projects</Link>
+            <Link to="/user-projects">Your Projects</Link>
             </div>
-            {
-            // <div>
-            // <Link to="/">Your Projects</Link>
-            // </div>
-            //should reroute to a component that displayPosts
-            //this users specific projects!
-          }
-
       </div>
     );
   }
