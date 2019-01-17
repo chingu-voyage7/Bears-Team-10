@@ -18,6 +18,8 @@ const handleSubmit = (props, projectId, e) => {
           },
         });
         if (res.status === 200) {
+          // const res = await axios.get('/api/posts/fetchProjectCollaborators');
+          // dispatch({ type: FETCH_COLLABORATORS, value: res.data.collaborators });
           message.success(res.data.message);
         }
       } catch (error) {
