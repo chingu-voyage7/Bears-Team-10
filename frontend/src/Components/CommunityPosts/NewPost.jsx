@@ -36,7 +36,7 @@ class NewPost extends Component {
               <Input.TextArea
                 className="newPost"
                 onChange={this.handleChange}
-                autosize={{ minRows: 5, maxRows: 25 }}
+                autosize={{ minRows: 5, maxRows: 10 }}
               />
             )}
           </FormItem>

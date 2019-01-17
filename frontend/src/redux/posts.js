@@ -18,8 +18,8 @@ export const removePosts = () => ({
 
 export const newPost = (
   postContent,
-  projectId,
-  redirectOnSuccess
+  projectId
+  // redirectOnSuccess
 ) => async dispatch => {
   try {
     const res = await axios('/api/posts/newPost', {
@@ -28,8 +28,8 @@ export const newPost = (
     });
     if (res.status === 200) {
       const posts = await axios.get('/api/posts/fetchPosts');
-      dispatch({ type: FETCH_POSTS, value: posts.data });
-      redirectOnSuccess();
+      dispatch({ type: FETCH_POSTS, value: posts.data.allPosts });
+      // redirectOnSuccess();
     }
   } catch (error) {
     console.log(error.response.data);

@@ -69,6 +69,11 @@ const queries = {
     return result.rows;
   },
 
+  fetchProjectCollaborators: async () => {
+    const result = await pool.query("SELECT * FROM project_collaborator_xref");
+    return result.rows;
+  },
+
   newPost: async (
     post_id,
     project_id,
@@ -84,7 +89,7 @@ const queries = {
     return result.rows[0];
   },
   
-  fetchPosts: async projectId => {
+  fetchPosts: async () => {
     const result = await pool.query("SELECT * FROM POSTS");
     return result.rows;
   },

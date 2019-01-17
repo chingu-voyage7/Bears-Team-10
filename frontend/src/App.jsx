@@ -7,6 +7,7 @@ import './App.css';
 import { fetchUser } from './redux/auth';
 import { fetchProjects } from './redux/projects';
 import { fetchPosts } from './redux/posts';
+import { fetchProjectCollaborators } from './redux/collaborators';
 import Register from './Components/Authentication/Register';
 import Login from './Components/Authentication/Login';
 import CreateProject from './Components/Projects/CreateProject';
@@ -33,6 +34,7 @@ class App extends Component {
     await this.props.fetchUser();
     this.props.fetchProjects();
     this.props.fetchPosts();
+    this.props.fetchProjectCollaborators();
   }
 
   onClickPosts(projectId, title, desc) {
@@ -41,6 +43,7 @@ class App extends Component {
     }));
     this.setState({ projectId, title, desc });
     this.props.fetchPosts();
+    this.props.fetchProjectCollaborators();
   }
 
   render() {
@@ -73,9 +76,10 @@ App.propTypes = {
   fetchUser: PropTypes.func.isRequired,
   fetchProjects: PropTypes.func.isRequired,
   fetchPosts: PropTypes.func.isRequired,
+  fetchProjectCollaborators: PropTypes.func.isRequired,
 };
 
 export default connect(
   null,
-  { fetchUser, fetchProjects, fetchPosts }
+  { fetchUser, fetchProjects, fetchPosts, fetchProjectCollaborators }
 )(App);
