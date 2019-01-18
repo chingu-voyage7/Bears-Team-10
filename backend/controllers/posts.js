@@ -27,7 +27,17 @@ async function fetchPosts(ctx) {
   });
 }
 
+async function fetchProjectCollaborators(ctx) {
+  const collaborators = await db.fetchProjectCollaborators();
+  ctx.send(200, {
+    message: "All collaborators for current Project",
+    collaborators
+  });
+}
+
+
 module.exports = {
   newPost,
-  fetchPosts
+  fetchPosts,
+  fetchProjectCollaborators
 };
