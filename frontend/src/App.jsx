@@ -7,6 +7,7 @@ import './App.css';
 import { fetchUser } from './redux/auth';
 import { fetchProjects } from './redux/projects';
 import { fetchPosts } from './redux/posts';
+import { fetchProjectCollaborators } from './redux/collaborators';
 import Register from './Components/Authentication/Register';
 import Login from './Components/Authentication/Login';
 import CreateProject from './Components/Projects/CreateProject';
@@ -16,6 +17,7 @@ import CommunityProjects from './Components/CommunityProjects/CommunityProjects'
 import CommunityPosts from './Components/CommunityPosts/CommunityPosts';
 import Projects from './Components/CommunityProjects/Projects';
 import Dashboard from './Components/Dashboard/Dashboard';
+import UserProjects from './Components/UserProjects/UserProjects';
 
 class App extends Component {
   constructor() {
@@ -33,6 +35,7 @@ class App extends Component {
     await this.props.fetchUser();
     this.props.fetchProjects();
     this.props.fetchPosts();
+    this.props.fetchProjectCollaborators();
   }
 
   onClickPosts(projectId, title, desc) {
@@ -41,6 +44,7 @@ class App extends Component {
     }));
     this.setState({ projectId, title, desc });
     this.props.fetchPosts();
+    this.props.fetchProjectCollaborators();
   }
 
   render() {
@@ -62,6 +66,7 @@ class App extends Component {
               component={CommunityProjects}
             />
             <Route exact path="/community-posts" component={CommunityPosts} />
+            <Route exact path="/user-projects" component={UserProjects} />
           </div>
         </BrowserRouter>
       </div>
@@ -73,9 +78,10 @@ App.propTypes = {
   fetchUser: PropTypes.func.isRequired,
   fetchProjects: PropTypes.func.isRequired,
   fetchPosts: PropTypes.func.isRequired,
+  fetchProjectCollaborators: PropTypes.func.isRequired,
 };
 
 export default connect(
   null,
-  { fetchUser, fetchProjects, fetchPosts }
+  { fetchUser, fetchProjects, fetchPosts, fetchProjectCollaborators }
 )(App);
