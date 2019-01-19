@@ -18,6 +18,7 @@ class NewPost extends Component {
         );
       }
     });
+    this.props.form.resetFields();
   };
 
   render() {
@@ -34,6 +35,7 @@ class NewPost extends Component {
           >
             {getFieldDecorator('postContent')(
               <Input.TextArea
+                id="newPost"
                 className="newPost"
                 onChange={this.handleChange}
                 autosize={{ minRows: 5, maxRows: 10 }}
