@@ -19,7 +19,7 @@ class Login extends Component {
         const { username, password } = values;
         await this.props.login(username, password);
         this.props.fetchProjects();
-        this.props.history.push('/main');
+        this.props.history.push('/');
       }
     });
   };
@@ -31,6 +31,7 @@ class Login extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
+        <h1>Login</h1>
         <FormItem>
           {getFieldDecorator('username', {
             rules: [{ required: true, message: 'Please enter your email id' }],
@@ -51,16 +52,17 @@ class Login extends Component {
               prefix={<Icon type="lock" />}
               placeholder="Password"
               type="password"
+              autoComplete="false"
             />
           )}
         </FormItem>
         <FormItem>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" className="login" htmlType="submit">
             <span>Login</span>
           </Button>
         </FormItem>
         <FormItem>
-          <Link to="/register">
+          <Link className="register" to="/register">
             <span>Register</span>
           </Link>
         </FormItem>

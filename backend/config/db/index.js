@@ -90,7 +90,7 @@ const queries = {
   },
   
   fetchPosts: async () => {
-    const result = await pool.query("SELECT * FROM POSTS");
+    const result = await pool.query("SELECT P.*, U.USERNAME FROM POSTS P, USERS U WHERE P.POST_CREATOR_USER_ID=U.ID");
     return result.rows;
   },
 

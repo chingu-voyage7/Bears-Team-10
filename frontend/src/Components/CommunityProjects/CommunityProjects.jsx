@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Projects from './Projects';
-import './CommunityProjects.css';
+// import './CommunityProjects.css';
 
 // for calling this component and the CommunityPosts (switching between
 // them with onClick) use:

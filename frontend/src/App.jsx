@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
+import { Layout } from 'antd';
 import Header from './Components/Header/Header';
 import './App.css';
 import { fetchUser } from './redux/auth';
@@ -18,31 +19,32 @@ import CommunityPosts from './Components/CommunityPosts/CommunityPosts';
 import Projects from './Components/CommunityProjects/Projects';
 import Dashboard from './Components/Dashboard/Dashboard';
 import UserProjects from './Components/UserProjects/UserProjects';
+import PrivateRoute from './Components/PrivateRoute';
 
+const { Content } = Layout;
+
+const WelcomePage = () => (
+  <div className="welcomePage">
+    <h1>Welcome to BT10's Project collaboration platform</h1>
+    <h2>
+      <span>Please </span>
+      <Link to="/login">Log In </Link>
+      <span>to continue or </span>
+      <Link to="/register">Register </Link>
+      <span>if you are new here</span>
+    </h2>
+  </div>
+);
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      displayPosts: false,
-      projectId: '',
-      title: '',
-      desc: '',
-    };
-    this.onClickPosts = this.onClickPosts.bind(this);
-  }
+  state = { isLoading: true };
 
   async componentDidMount() {
     await this.props.fetchUser();
+    this.setState({ isLoading: false });
+    if (!this.props.user.isLoggedIn) {
+      return;
+    }
     this.props.fetchProjects();
-    this.props.fetchPosts();
-    this.props.fetchProjectCollaborators();
-  }
-
-  onClickPosts(projectId, title, desc) {
-    this.setState(prevState => ({
-      displayPosts: !prevState.displayPosts,
-    }));
-    this.setState({ projectId, title, desc });
     this.props.fetchPosts();
     this.props.fetchProjectCollaborators();
   }
@@ -52,21 +54,75 @@ class App extends Component {
       <div>
         <BrowserRouter>
           <div className="App">
-            <Header />
-            <Route exact path="/main" component={Dashboard} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/create-project" component={CreateProject} />
-            <Route exact path="/new-post" component={NewPost} />
-            <Route exact path="/profile" component={Profile} />
-            <Route exact path="/project/:project_id" component={Projects} />
-            <Route
-              exact
-              path="/community-projects"
-              component={CommunityProjects}
-            />
-            <Route exact path="/community-posts" component={CommunityPosts} />
-            <Route exact path="/user-projects" component={UserProjects} />
+            <Layout className="layout">
+              <Header />
+              <Content>
+                <Route exact path="/register" component={Register} />
+                <Route exact path="/login" component={Login} />
+                <Switch>
+                  <PrivateRoute
+                    exact
+                    isLoggedIn={this.props.user.isLoggedIn}
+                    isLoading={this.state.isLoading}
+                    path="/create-project"
+                    component={CreateProject}
+                  />
+                  <PrivateRoute
+                    exact
+                    isLoggedIn={this.props.user.isLoggedIn}
+                    isLoading={this.state.isLoading}
+                    path="/new-post"
+                    component={NewPost}
+                  />
+                  <PrivateRoute
+                    exact
+                    isLoggedIn={this.props.user.isLoggedIn}
+                    isLoading={this.state.isLoading}
+                    path="/profile"
+                    component={Profile}
+                  />
+                  <PrivateRoute
+                    exact
+                    isLoggedIn={this.props.user.isLoggedIn}
+                    isLoading={this.state.isLoading}
+                    path="/project/:project_id"
+                    component={Projects}
+                  />
+                  <PrivateRoute
+                    exact
+                    isLoggedIn={this.props.user.isLoggedIn}
+                    isLoading={this.state.isLoading}
+                    path="/community-projects"
+                    component={CommunityProjects}
+                  />
+                  <PrivateRoute
+                    exact
+                    isLoggedIn={this.props.user.isLoggedIn}
+                    isLoading={this.state.isLoading}
+                    path="/community-posts"
+                    component={CommunityPosts}
+                  />
+                  <PrivateRoute
+                    exact
+                    isLoggedIn={this.props.user.isLoggedIn}
+                    isLoading={this.state.isLoading}
+                    path="/user-projects"
+                    component={UserProjects}
+                  />
+                  <Route
+                    exact
+                    path="/"
+                    component={() =>
+                      this.props.user.isLoggedIn ? (
+                        <Dashboard />
+                      ) : (
+                        <WelcomePage />
+                      )
+                    }
+                  />
+                </Switch>
+              </Content>
+            </Layout>
           </div>
         </BrowserRouter>
       </div>
@@ -81,7 +137,11 @@ App.propTypes = {
   fetchProjectCollaborators: PropTypes.func.isRequired,
 };
 
+function mapStateToProps(state) {
+  return { user: state.auth.user };
+}
+
 export default connect(
-  null,
+  mapStateToProps,
   { fetchUser, fetchProjects, fetchPosts, fetchProjectCollaborators }
 )(App);
