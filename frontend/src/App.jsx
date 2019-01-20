@@ -107,7 +107,7 @@ class App extends Component {
                     isLoggedIn={this.props.user.isLoggedIn}
                     isLoading={this.state.isLoading}
                     path="/user-projects"
-                    component={UserProjects}
+                    component={CommunityProjects}
                   />
                   <Route
                     exact
