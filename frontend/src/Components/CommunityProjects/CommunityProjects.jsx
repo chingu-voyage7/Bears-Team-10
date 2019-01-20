@@ -26,6 +26,7 @@ const CommunityProjects = ({ allProjects }) => (
                   style={{ textDecoration: 'none', color: 'black' }}
                 >
                   <Card
+                    hoverable
                     title={(() => (
                       <div className="cardTitle">
                         <div>
