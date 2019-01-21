@@ -28,17 +28,13 @@ class NewPost extends Component {
     return (
       <div className="form center pa4 br3 shadow-5">
         <Form onSubmit={this.handleSubmit} className="create-post-form">
-          <FormItem
-            labelCol={{ span: 3 }}
-            wrapperCol={{ span: 19 }}
-            label="New Post"
-          >
+          <FormItem labelCol={{ span: 3 }} wrapperCol={{ span: 19 }}>
             {getFieldDecorator('postContent')(
               <Input.TextArea
                 id="newPost"
                 className="newPost"
                 onChange={this.handleChange}
-                autosize={{ minRows: 5, maxRows: 10 }}
+                autosize={{ minRows: 3, maxRows: 10 }}
               />
             )}
           </FormItem>

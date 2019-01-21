@@ -1,0 +1,20 @@
+.login-form,
+.register-form {
+  min-width: 10em;
+  width: 25em;
+  max-width: 25em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login-form .login,
+.register-form .register {
+  width: 100%;
+}
+
+.login-form .register,
+.register-form .login {
+  float: right;
+}

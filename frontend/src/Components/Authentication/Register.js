@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-// needed to fix props validation
 import PropTypes from 'prop-types';
-//
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { Form, Input, Icon, Button } from 'antd';
 import { register } from '../../redux/auth';
 import { fetchProjects } from '../../redux/projects';
@@ -31,6 +29,7 @@ class Register extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit} className="register-form">
+        <h1>Register</h1>
         <FormItem>
           {getFieldDecorator('username', {
             rules: [
@@ -62,13 +61,19 @@ class Register extends Component {
               prefix={<Icon type="lock" />}
               placeholder="Password"
               type="password"
+              autoComplete="false"
             />
           )}
         </FormItem>
         <FormItem>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" className="register" htmlType="submit">
             <span>Register</span>
           </Button>
+        </FormItem>
+        <FormItem>
+          <Link className="login" to="/login">
+            <span>Login</span>
+          </Link>
         </FormItem>
       </Form>
     );
@@ -80,9 +85,9 @@ const WrappedRegisterForm = Form.create()(Register);
 // needed to fix props validation
 Register.propTypes = {
   fetchProjects: PropTypes.func.isRequired,
-  form: PropTypes.string.isRequired,
-  register: PropTypes.string.isRequired,
-  history: PropTypes.string.isRequired,
+  form: PropTypes.shape.isRequired,
+  register: PropTypes.func.isRequired,
+  history: PropTypes.shape.isRequired,
 };
 //
 

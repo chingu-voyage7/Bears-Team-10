@@ -1,0 +1,23 @@
+.ant-layout-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ant-menu {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+#auth-menu {
+  background-color: transparent;
+}
+
+.username {
+  margin-right: 0.5em;
+}
+
+.home-title {
+  margin-right: 0.5em;
+  display: inline-block;
+}
