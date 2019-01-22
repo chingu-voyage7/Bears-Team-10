@@ -1,20 +1,5 @@
 @import '~antd/dist/antd.css';
 
-.header-div {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-bottom: 1em;
-}
-.header-home{
-  border: .2em solid grey;
-  padding: .09em;
-  border-radius: 1em
-}
-.header-div .header-home:hover {
-  background: #eefdf5;
-}
-
 .Profile {
   display: flex;
   flex-direction: column;
@@ -66,20 +51,37 @@
   display: block;
 }
 
-.Dashboard{
-  display: grid;
-  grid-template-columns: 50vw 50vw;
-  grid-template-rows: 10vw 10vw;
-  grid-gap: .5em;
-  justify-items: center;
-  text-align: center;
+.dashboard {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
 }
 
-.Dashboard div {
-  border: .2em solid grey;
-  width: 50vw;
+.create-project-form {
+  margin-top: 5em;
 }
 
-.Dashboard div:hover{
-background: #eefdf5;
+.ant-layout-header a,
+.ant-layout-header a:visited,
+.ant-layout-header a:hover {
+  color: white;
+}
+
+.welcomePage {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.ant-layout-content {
+  height: calc(100% - 64px);
+  min-height: 100vh;
 }
