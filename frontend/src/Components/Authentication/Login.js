@@ -7,6 +7,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { Form, Input, Icon, Button } from 'antd';
 import { login } from '../../redux/auth';
 import { fetchProjects } from '../../redux/projects';
+import { fetchPosts } from '../../redux/posts';
 import './auth.css';
 
 const { Item: FormItem } = Form;
@@ -19,6 +20,7 @@ class Login extends Component {
         const { username, password } = values;
         await this.props.login(username, password);
         this.props.fetchProjects();
+        this.props.fetchPosts();
         this.props.history.push('/');
       }
     });
@@ -76,6 +78,7 @@ const WrappedLoginForm = withRouter(Form.create()(Login));
 // needed to fix props validation
 Login.propTypes = {
   fetchProjects: PropTypes.func.isRequired,
+  fetchPosts: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   form: PropTypes.object.isRequired,
   login: PropTypes.func.isRequired,
@@ -86,5 +89,5 @@ Login.propTypes = {
 
 export default connect(
   null,
-  { login, fetchProjects }
+  { login, fetchProjects, fetchPosts }
 )(WrappedLoginForm);
