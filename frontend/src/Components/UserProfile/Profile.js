@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 // needed to fix props validation
 import PropTypes from 'prop-types';
-//
 import { Avatar, Button } from 'antd';
 
 import { connect } from 'react-redux';
@@ -12,6 +11,7 @@ import EditName from './Edit/EditName';
 import EditBio from './Edit/EditBio';
 import EditInterests from './Edit/EditInterests';
 import EditGithub from './Edit/EditGithub';
+import './Profile.css';
 
 class Profile extends Component {
   constructor(props) {
@@ -73,124 +73,128 @@ class Profile extends Component {
   render() {
     return (
       <div className="Profile">
-        <div className="Profile_Photo Profile_Component">
+        <div className="Profile_Photo Profile_Component Grid_Item">
           <div className="Profile_photo_image">
             {this.state.photo ? (
               this.props.profile.profile_picture
             ) : (
-              <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>
-                U
+              <Avatar
+                size={64}
+                style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}
+              >
+                {this.props.profile.display_name
+                  ? this.props.profile.display_name
+                  : 'User'}
               </Avatar>
             )}
           </div>
-          <div
-            className="Profile_upload_photo"
-            onClick={this.handleUploadPhoto}
-            // This needs to be added with the new eslint stuff
-            role="presentation"
-            //
-          >
-            <Button type="dashed">Upload</Button>
-          </div>
+          {
+            // <div
+            //   className="Profile_upload_photo"
+            //   onClick={this.handleUploadPhoto}
+            //   // This needs to be added with the new eslint stuff
+            //   role="presentation"
+            //   //
+            // >
+            //   <Button type="dashed">Upload</Button>
+            // </div>
+          }
         </div>
 
-        <div className="Profile_Display_Name Profile_Component">
-          <div className="Profile_Field">
-            <div
-              className="Display_Name Edit_Icon"
-              onClick={this.sortShowEdit}
-              role="presentation"
-            >
-              <FaEdit />
-            </div>
-            {this.state.Show_Display_Name ? (
-              <EditName
-                display_name={this.props.profile.display_name}
-                handleCancel={this.handleCancel}
-                editProfileComponent={this.editProfileComponent}
-              />
-            ) : (
-              <div className="Value_Content">
-                {this.props.profile.display_name}
-              </div>
-            )}
-            <div className="Value_Header">
-              <h3>Name</h3>
-            </div>
+        <div
+          className="Display_Name Edit_Icon Grid_Item"
+          onClick={this.sortShowEdit}
+          role="presentation"
+        >
+          <FaEdit />
+        </div>
+        {this.state.Show_Display_Name ? (
+          <div className="Value_Content_Name Value_Content Grid_Item">
+            <EditName
+              display_name={this.props.profile.display_name}
+              handleCancel={this.handleCancel}
+              editProfileComponent={this.editProfileComponent}
+            />
           </div>
+        ) : (
+          <div className="Value_Content_Name Value_Content Grid_Item">
+            {this.props.profile.display_name}
+          </div>
+        )}
+        <div className="Value_Header_Name Value_Header Grid_Item">
+          <h3>Name</h3>
         </div>
 
-        <div className="Profile_Bio Profile_Component">
-          <div className="Profile_Field">
-            <div
-              className="Bio Edit_Icon"
-              onClick={this.sortShowEdit}
-              role="presentation"
-            >
-              <FaEdit />
-            </div>
-            {this.state.Show_Bio ? (
-              <EditBio
-                bio={this.props.profile.bio}
-                handleCancel={this.handleCancel}
-                editProfileComponent={this.editProfileComponent}
-              />
-            ) : (
-              <div className="Value_Content">{this.props.profile.bio}</div>
-            )}
-            <div className="Value_Header">
-              <h3>Bio</h3>
-            </div>
-          </div>
+        <div
+          className="Bio Edit_Icon Grid_Item"
+          onClick={this.sortShowEdit}
+          role="presentation"
+        >
+          <FaEdit />
         </div>
-        <div className="Profile_Interests Profile_Component">
-          <div className="Profile_Field">
-            <div
-              className="Interests Edit_Icon"
-              onClick={this.sortShowEdit}
-              role="presentation"
-            >
-              <FaEdit />
-            </div>
-            {this.state.Show_Interests ? (
-              <EditInterests
-                interests={this.props.profile.interests}
-                handleCancel={this.handleCancel}
-                editProfileComponent={this.editProfileComponent}
-              />
-            ) : (
-              <div className="Value_Content">
-                {this.props.profile.interests}
-              </div>
-            )}
-            <div className="Value_Header">
-              <h3>Interests</h3>
-            </div>
+        {this.state.Show_Bio ? (
+          <div className="Value_Content_Bio Value_Content Grid_Item">
+            <EditBio
+              bio={this.props.profile.bio}
+              handleCancel={this.handleCancel}
+              editProfileComponent={this.editProfileComponent}
+            />
           </div>
+        ) : (
+          <div className="Value_Content_Bio Value_Content Grid_Item">
+            {this.props.profile.bio}
+          </div>
+        )}
+        <div className="Value_Header_Bio Value_Header Grid_Item">
+          <h3>Bio</h3>
         </div>
 
-        <div className="Profile_Github Profile_Component">
-          <div className="Profile_Field">
-            <div
-              className="Github Edit_Icon"
-              onClick={this.sortShowEdit}
-              role="presentation"
-            >
-              <FaEdit />
-            </div>
-            {this.state.Show_Github ? (
-              <EditGithub
-                github={this.props.profile.github}
-                handleCancel={this.handleCancel}
-                editProfileComponent={this.editProfileComponent}
-              />
-            ) : (
-              <div className="Value_Content">{this.props.profile.github}</div>
-            )}
-            <div className="Value_Header">
-              <h3>Github</h3>
-            </div>
+        <div
+          className="Interests Edit_Icon Grid_Item"
+          onClick={this.sortShowEdit}
+          role="presentation"
+        >
+          <FaEdit />
+        </div>
+        {this.state.Show_Interests ? (
+          <div className="Value_Content_Interests Value_Content Grid_Item">
+            <EditInterests
+              interests={this.props.profile.interests}
+              handleCancel={this.handleCancel}
+              editProfileComponent={this.editProfileComponent}
+            />
           </div>
+        ) : (
+          <div className="Value_Content_Interests Value_Content Grid_Item">
+            {this.props.profile.interests}
+          </div>
+        )}
+        <div className="Value_Header_Interests Value_Header Grid_Item">
+          <h3>Interests</h3>
+        </div>
+
+        <div
+          className="Github Edit_Icon Grid_Item"
+          onClick={this.sortShowEdit}
+          role="presentation"
+        >
+          <FaEdit />
+        </div>
+        {this.state.Show_Github ? (
+          <div className="Value_Content_Github Value_Content Grid_Item">
+            <EditGithub
+              github={this.props.profile.github}
+              handleCancel={this.handleCancel}
+              editProfileComponent={this.editProfileComponent}
+            />
+          </div>
+        ) : (
+          <div className="Value_Content_Github Value_Content Grid_Item">
+            {this.props.profile.github}
+          </div>
+        )}
+        <div className="Value_Header_Github Value_Header Grid_Item">
+          <h3>Github</h3>
         </div>
       </div>
     );
