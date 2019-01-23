@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Row, Col, Timeline, Card } from 'antd';
 import { connect } from 'react-redux';
 import { fetchProjectCollaborators } from '../../redux/collaborators';
@@ -22,6 +23,13 @@ class Projects extends React.Component {
         project.project_id === project_id &&
         project.user_id === this.props.user.user.id
     );
+    const options = {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+    };
     return (
       <div className="project">
         <Row>
@@ -31,6 +39,8 @@ class Projects extends React.Component {
                 {thisProject.length ? thisProject[0].project_description : ''}
               </span>
             </h3>
+          </div>
+          <div className="collaborators">
             {thisProject.length &&
             this.props.user.user.id === thisProject[0].project_owner_user_id ? (
               <WrappedAddCollaborator projectId={project_id} />
@@ -38,7 +48,7 @@ class Projects extends React.Component {
               ''
             )}
           </div>
-          <Col span={8} offset={8}>
+          <Col span={23} offset={1}>
             <div className="projectText" role="presentation">
               <h1 className="projectTitle">
                 <span>
@@ -51,33 +61,6 @@ class Projects extends React.Component {
               <div>
                 <ul className="posts">
                   <Timeline>
-                    <TimelineItem color="red">
-                      <Card
-                        style={{ padding: '10px' }}
-                        bodyStyle={{ padding: '1em' }}
-                        bordered={false}
-                        size="small"
-                        title={(() => (
-                          <div className="new-post-card-title">
-                            <div>{this.props.user.user.username}</div>
-                          </div>
-                        ))()}
-                      >
-                        {thisProject.length &&
-                        this.props.user.user.id ===
-                          thisProject[0].project_owner_user_id ? (
-                          <NewPost projectId={project_id} />
-                        ) : (
-                          [
-                            thisProject.length && collaborator.length ? (
-                              <NewPost projectId={project_id} />
-                            ) : (
-                              ''
-                            ),
-                          ]
-                        )}
-                      </Card>
-                    </TimelineItem>
                     {this.props.allPosts
                       .filter(post => post.project_id === project_id)
                       .sort()
@@ -100,7 +83,9 @@ class Projects extends React.Component {
                               <div className="new-post-card-title">
                                 <div>{post.username}</div>
                                 <div>
-                                  {post.creation_timestamp.substring(0, 10)}
+                                  {new Date(
+                                    post.creation_timestamp
+                                  ).toLocaleString([], options)}
                                 </div>
                               </div>
                             ))()}
@@ -109,6 +94,33 @@ class Projects extends React.Component {
                           </Card>
                         </TimelineItem>
                       ))}
+                    <TimelineItem color="red">
+                      <Card
+                        style={{ padding: '10px' }}
+                        bodyStyle={{ padding: '1em' }}
+                        bordered={false}
+                        size="small"
+                        title={(() => (
+                          <div className="new-post-card-title">
+                            <div>{this.props.user.user.username}</div>
+                          </div>
+                        ))()}
+                      >
+                        {thisProject.length &&
+                        this.props.user.user.id ===
+                          thisProject[0].project_owner_user_id ? (
+                            <NewPost projectId={project_id} />
+                        ) : (
+                          [
+                            thisProject.length && collaborator.length ? (
+                              <NewPost projectId={project_id} />
+                            ) : (
+                              ''
+                            ),
+                          ]
+                        )}
+                      </Card>
+                    </TimelineItem>
                   </Timeline>
                 </ul>
               </div>
@@ -130,6 +142,17 @@ function mapStateToProps(state) {
     user: state.auth.user,
   };
 }
+
+Projects.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  allPosts: PropTypes.array.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  allProjects: PropTypes.array.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  collaborators: PropTypes.array.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  user: PropTypes.object.isRequired,
+};
 
 export default connect(
   mapStateToProps,
