@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { Form, Input, Icon, Button } from 'antd';
-import { register } from '../../redux/auth';
+import { register, fetchUser } from '../../redux/auth';
 import { fetchProjects } from '../../redux/projects';
+import { fetchPosts } from '../../redux/posts';
 import './auth.css';
 
 const { Item: FormItem } = Form;
@@ -16,7 +17,9 @@ class Register extends Component {
       if (!err) {
         const { username, password } = values;
         await this.props.register(username, password);
+        this.props.fetchUser();
         this.props.fetchProjects();
+        this.props.fetchPosts();
         this.props.history.push('/');
       }
     });
@@ -85,6 +88,8 @@ const WrappedRegisterForm = Form.create()(Register);
 // needed to fix props validation
 Register.propTypes = {
   fetchProjects: PropTypes.func.isRequired,
+  fetchPosts: PropTypes.func.isRequired,
+  fetchUser: PropTypes.func.isRequired,
   form: PropTypes.shape.isRequired,
   register: PropTypes.func.isRequired,
   history: PropTypes.shape.isRequired,
@@ -94,6 +99,6 @@ Register.propTypes = {
 export default withRouter(
   connect(
     null,
-    { register, fetchProjects }
+    { register, fetchProjects, fetchPosts, fetchUser }
   )(WrappedRegisterForm)
 );
