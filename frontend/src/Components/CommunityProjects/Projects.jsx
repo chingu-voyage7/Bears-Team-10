@@ -39,6 +39,16 @@ class Projects extends React.Component {
                 {thisProject.length ? thisProject[0].project_description : ''}
               </span>
             </h3>
+            <h3 style={{ color: 'orange' }}>
+              {thisProject.length &&
+              this.props.user.user.id === thisProject[0].project_owner_user_id
+                ? ''
+                : [
+                    thisProject.length && collaborator.length
+                      ? ''
+                      : 'You are not a collaborator on this project, and do not have permission to post comments here',
+                  ]}
+            </h3>
           </div>
           <div className="collaborators">
             {thisProject.length &&
@@ -109,7 +119,7 @@ class Projects extends React.Component {
                         {thisProject.length &&
                         this.props.user.user.id ===
                           thisProject[0].project_owner_user_id ? (
-                            <NewPost projectId={project_id} />
+                          <NewPost projectId={project_id} />
                         ) : (
                           [
                             thisProject.length && collaborator.length ? (
