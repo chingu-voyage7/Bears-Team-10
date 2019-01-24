@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently --kill-others \"npm run backend\" \"npm run frontend\"",
-    "backend": "cd backend && npm run dev",
-    "frontend": "cd frontend && npm start",
-    "build": "cd frontend && npm run build"
+    "start": "node backend/index.js",
+    "dev": "concurrently --kill-others \"npm run backend\" \"npm run frontend\"",
+    "server": "npm run start --prefix backend",
+    "client": "npm run start --prefix frontend",
+    "build": "cd frontend && npm run build",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend && npm install --prefix backend"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +19,7 @@
   "dependencies": {
     "husky": "^1.2.1",
     "lint-staged": "^8.1.0",
+    "nodemon": "^1.18.9",
     "prettier": "^1.15.3"
   }
 }
