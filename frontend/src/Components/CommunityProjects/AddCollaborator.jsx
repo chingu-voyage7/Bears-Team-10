@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Form, Input, Button, Icon, message } from 'antd';
 import axios from 'axios';
 
@@ -58,6 +59,12 @@ const AddCollaborator = props => {
       </FormItem>
     </Form>
   );
+};
+
+AddCollaborator.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  form: PropTypes.object.isRequired,
+  projectId: PropTypes.string.isRequired,
 };
 
 const WrappedAddCollaborator = Form.create()(AddCollaborator);

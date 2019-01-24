@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Timeline, Card } from 'antd';
@@ -12,15 +13,15 @@ const { Item: TimelineItem } = Timeline;
 // eslint-disable-next-line react/prefer-stateless-function
 class Projects extends React.Component {
   render() {
-    const project_id =
+    const projectId =
       this.props.project_id || this.props.match.params.project_id;
     const parentSource = this.props.project_id ? 'community' : 'individual';
     const thisProject = this.props.allProjects.filter(
-      project => project.project_id === project_id
+      project => project.project_id === projectId
     );
     const collaborator = this.props.collaborators.filter(
       project =>
-        project.project_id === project_id &&
+        project.project_id === projectId &&
         project.user_id === this.props.user.user.id
     );
     const options = {
@@ -39,11 +40,21 @@ class Projects extends React.Component {
                 {thisProject.length ? thisProject[0].project_description : ''}
               </span>
             </h3>
+            <h3 style={{ color: 'orange' }}>
+              {thisProject.length &&
+              this.props.user.user.id === thisProject[0].project_owner_user_id
+                ? ''
+                : [
+                    thisProject.length && collaborator.length
+                      ? ''
+                      : 'You are not a collaborator on this project, and do not have permission to post comments here',
+                  ]}
+            </h3>
           </div>
           <div className="collaborators">
             {thisProject.length &&
             this.props.user.user.id === thisProject[0].project_owner_user_id ? (
-              <WrappedAddCollaborator projectId={project_id} />
+              <WrappedAddCollaborator projectId={projectId} />
             ) : (
               ''
             )}
@@ -62,7 +73,7 @@ class Projects extends React.Component {
                 <ul className="posts">
                   <Timeline>
                     {this.props.allPosts
-                      .filter(post => post.project_id === project_id)
+                      .filter(post => post.project_id === projectId)
                       .sort()
                       .reverse()
                       .map(post => (
@@ -109,11 +120,11 @@ class Projects extends React.Component {
                         {thisProject.length &&
                         this.props.user.user.id ===
                           thisProject[0].project_owner_user_id ? (
-                            <NewPost projectId={project_id} />
+                            <NewPost projectId={projectId} />
                         ) : (
                           [
                             thisProject.length && collaborator.length ? (
-                              <NewPost projectId={project_id} />
+                              <NewPost projectId={projectId} />
                             ) : (
                               ''
                             ),
@@ -144,14 +155,11 @@ function mapStateToProps(state) {
 }
 
 Projects.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
   allPosts: PropTypes.array.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
   allProjects: PropTypes.array.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
   collaborators: PropTypes.array.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
   user: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
 };
 
 export default connect(
