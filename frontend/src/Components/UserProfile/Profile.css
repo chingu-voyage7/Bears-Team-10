@@ -1,0 +1,99 @@
+.Profile {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto auto auto;
+  justify-content: space-evenly;
+  align-content: center;
+  grid-row-gap: 4em;
+  padding-bottom: 5em;
+  text-align: center;
+}
+.Grid_Item {
+}
+.Edit_Form {
+  display: inline-block;
+}
+.Value_Content {
+  background: white;
+  padding: 1em;
+  border-radius: 25px;
+  border: 1px solid grey;
+  display: inline-block;
+}
+.Value_Header {
+  text-align: center;
+}
+
+.Profile_Photo {
+  grid-area: 1 / 2 / 1 / 2;
+  text-align: center;
+}
+
+.Profile_photo_image {
+  display: inline-block;
+}
+
+.Display_Name {
+  grid-area: 2 / 3 / 2 / 3;
+}
+
+.Value_Content_Name {
+  grid-area: 2 / 2 / 2 / 2;
+}
+
+.Value_Header_Name {
+  grid-area: 2 / 1 / 2 / 1;
+}
+
+.Bio {
+  grid-area: 3 / 3 / 3 / 3;
+}
+
+.Value_Content_Bio {
+  grid-area: 3 / 2 / 3 / 2;
+}
+
+.Value_Header_Bio {
+  grid-area: 3 / 1 / 3 / 1;
+}
+
+.Interests {
+  grid-area: 4 / 3 / 4 / 3;
+}
+
+.Value_Content_Interests {
+  grid-area: 4 / 2 / 4 / 2;
+}
+
+.Value_Header_Interests {
+  grid-area: 4 / 1 / 4 / 1;
+}
+
+.Github {
+  grid-area: 5 / 3 / 5 / 3;
+}
+
+.Value_Content_Github {
+  grid-area: 5 / 2 / 5 / 2;
+}
+
+.Value_Header_Github {
+  grid-area: 5 / 1 / 5 / 1;
+}
+
+.Value_Header {
+  height: 1em;
+}
+.Value_Content {
+  overflow: auto;
+}
+
+.Profile_Field {
+}
+
+.Edit_Form {
+}
+
+.Profile_Field:hover + .Edit_Icon {
+  display: block;
+}
