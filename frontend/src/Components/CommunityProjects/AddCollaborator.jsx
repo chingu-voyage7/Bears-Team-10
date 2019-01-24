@@ -27,6 +27,7 @@ const handleSubmit = (props, projectId, e) => {
       }
     }
   });
+  props.form.resetFields();
 };
 
 const AddCollaborator = props => {
