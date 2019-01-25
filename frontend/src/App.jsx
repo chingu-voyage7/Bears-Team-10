@@ -6,6 +6,7 @@ import { Layout } from 'antd';
 import Header from './Components/Header/Header';
 import './App.css';
 import { fetchUser } from './redux/auth';
+import { fetchUserProfile } from './redux/profile';
 import { fetchProjects } from './redux/projects';
 import { fetchPosts } from './redux/posts';
 import { fetchProjectCollaborators } from './redux/collaborators';
@@ -18,7 +19,6 @@ import CommunityProjects from './Components/CommunityProjects/CommunityProjects'
 import CommunityPosts from './Components/CommunityPosts/CommunityPosts';
 import Projects from './Components/CommunityProjects/Projects';
 import Dashboard from './Components/Dashboard/Dashboard';
-import UserProjects from './Components/UserProjects/UserProjects';
 import PrivateRoute from './Components/PrivateRoute';
 
 const { Content } = Layout;
@@ -40,6 +40,7 @@ class App extends Component {
 
   async componentDidMount() {
     await this.props.fetchUser();
+    this.props.fetchUserProfile();
     this.setState({ isLoading: false });
     if (!this.props.user.isLoggedIn) {
       return;
@@ -132,6 +133,7 @@ class App extends Component {
 
 App.propTypes = {
   fetchUser: PropTypes.func.isRequired,
+  fetchUserProfile: PropTypes.func.isRequired,
   fetchProjects: PropTypes.func.isRequired,
   fetchPosts: PropTypes.func.isRequired,
   fetchProjectCollaborators: PropTypes.func.isRequired,
@@ -143,5 +145,11 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { fetchUser, fetchProjects, fetchPosts, fetchProjectCollaborators }
+  {
+    fetchUser,
+    fetchUserProfile,
+    fetchProjects,
+    fetchPosts,
+    fetchProjectCollaborators,
+  }
 )(App);

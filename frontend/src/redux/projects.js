@@ -8,7 +8,10 @@ const initialState = {
 
 export const fetchProjects = () => async dispatch => {
   const res = await axios.get('/api/projects/fetchProjects');
-  dispatch({ type: FETCH_PROJECTS, value: res.data.allProjects });
+  return new Promise((resolve, _reject) => {
+    dispatch({ type: FETCH_PROJECTS, value: res.data.allProjects });
+    resolve();
+  });
 };
 
 export const removeProjects = () => {
@@ -29,9 +32,10 @@ export const createProject = (
       data: { projectTitle, projectDescription },
     });
     if (res.status === 200) {
+      const { createdProject } = res.data;
       const projects = await axios.get('/api/projects/fetchProjects');
       dispatch({ type: FETCH_PROJECTS, value: projects.data });
-      redirectOnSuccess();
+      redirectOnSuccess(createdProject.project_id);
     }
   } catch (error) {
     console.log(error.response.data);
