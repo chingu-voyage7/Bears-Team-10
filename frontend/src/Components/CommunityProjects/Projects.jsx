@@ -34,31 +34,6 @@ class Projects extends React.Component {
     return (
       <div className="project">
         <Row>
-          <div className="left-floating-description">
-            <h3 className="projectDescription">
-              <span>
-                {thisProject.length ? thisProject[0].project_description : ''}
-              </span>
-            </h3>
-            <h3 style={{ color: 'orange' }}>
-              {thisProject.length &&
-              this.props.user.user.id === thisProject[0].project_owner_user_id
-                ? ''
-                : [
-                    thisProject.length && collaborator.length
-                      ? ''
-                      : 'You are not a collaborator on this project, and do not have permission to post comments here',
-                  ]}
-            </h3>
-          </div>
-          <div className="collaborators">
-            {thisProject.length &&
-            this.props.user.user.id === thisProject[0].project_owner_user_id ? (
-              <WrappedAddCollaborator projectId={projectId} />
-            ) : (
-              ''
-            )}
-          </div>
           <Col span={23} offset={1}>
             <div className="projectText" role="presentation">
               <h1 className="projectTitle">
@@ -67,7 +42,32 @@ class Projects extends React.Component {
                 </span>
               </h1>
             </div>
-
+            <div className="left-floating-description">
+              <h3 className="projectDescription">
+                <span>
+                  {thisProject.length ? thisProject[0].project_description : ''}
+                </span>
+              </h3>
+              <h3 style={{ color: 'orange' }}>
+                {thisProject.length &&
+                this.props.user.user.id === thisProject[0].project_owner_user_id
+                  ? ''
+                  : [
+                      thisProject.length && collaborator.length
+                        ? ''
+                        : 'You are not a collaborator on this project, and do not have permission to post comments here',
+                    ]}
+              </h3>
+            </div>
+            <div className="collaborators">
+              {thisProject.length &&
+              this.props.user.user.id ===
+                thisProject[0].project_owner_user_id ? (
+                  <WrappedAddCollaborator projectId={projectId} />
+              ) : (
+                ''
+              )}
+            </div>
             {parentSource === 'individual' ? (
               <div>
                 <ul className="posts">
