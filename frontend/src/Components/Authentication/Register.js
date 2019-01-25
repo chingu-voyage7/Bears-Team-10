@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { Form, Input, Icon, Button } from 'antd';
 import { register, fetchUser } from '../../redux/auth';
+import { fetchUserProfile } from '../../redux/profile';
 import { fetchProjects } from '../../redux/projects';
 import { fetchPosts } from '../../redux/posts';
 import './auth.css';
@@ -17,7 +18,8 @@ class Register extends Component {
       if (!err) {
         const { username, password } = values;
         await this.props.register(username, password);
-        this.props.fetchUser();
+        await this.props.fetchUser();
+        this.props.fetchUserProfile();
         this.props.fetchProjects();
         this.props.fetchPosts();
         this.props.history.push('/');
@@ -90,6 +92,7 @@ Register.propTypes = {
   fetchProjects: PropTypes.func.isRequired,
   fetchPosts: PropTypes.func.isRequired,
   fetchUser: PropTypes.func.isRequired,
+  fetchUserProfile: PropTypes.func.isRequired,
   form: PropTypes.shape.isRequired,
   register: PropTypes.func.isRequired,
   history: PropTypes.shape.isRequired,
@@ -99,6 +102,6 @@ Register.propTypes = {
 export default withRouter(
   connect(
     null,
-    { register, fetchProjects, fetchPosts, fetchUser }
+    { register, fetchProjects, fetchPosts, fetchUser, fetchUserProfile }
   )(WrappedRegisterForm)
 );
