@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { Form, Input, Icon, Button } from 'antd';
 import { login, fetchUser } from '../../redux/auth';
+import { fetchUserProfile } from '../../redux/profile';
 import { fetchProjects } from '../../redux/projects';
 import { fetchPosts } from '../../redux/posts';
 import './auth.css';
@@ -19,7 +20,8 @@ class Login extends Component {
       if (!err) {
         const { username, password } = values;
         await this.props.login(username, password);
-        this.props.fetchUser();
+        await this.props.fetchUser();
+        this.props.fetchUserProfile();
         this.props.fetchProjects();
         this.props.fetchPosts();
         this.props.history.push('/');
@@ -81,6 +83,7 @@ Login.propTypes = {
   fetchProjects: PropTypes.func.isRequired,
   fetchPosts: PropTypes.func.isRequired,
   fetchUser: PropTypes.func.isRequired,
+  fetchUserProfile: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   form: PropTypes.object.isRequired,
   login: PropTypes.func.isRequired,
@@ -91,5 +94,5 @@ Login.propTypes = {
 
 export default connect(
   null,
-  { login, fetchProjects, fetchPosts, fetchUser }
+  { login, fetchProjects, fetchPosts, fetchUser, fetchUserProfile }
 )(WrappedLoginForm);

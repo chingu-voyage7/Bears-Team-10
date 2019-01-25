@@ -13,8 +13,13 @@ class CreateProject extends Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         const { projectTitle, projectDescription } = values;
-        this.props.createProject(projectTitle, projectDescription, () =>
-          this.props.history.push('/')
+        this.props.createProject(
+          projectTitle,
+          projectDescription,
+          async newProjectId => {
+            await this.props.fetchProjects();
+            this.props.history.push(`/project/${newProjectId}`);
+          }
         );
       }
     });
@@ -35,7 +40,7 @@ class CreateProject extends Component {
             <FormItem
               labelCol={{ span: 5 }}
               wrapperCol={{ span: 12 }}
-              label="Post Title"
+              label="Project Title"
             >
               {getFieldDecorator('projectTitle', {
                 rules: [
@@ -54,7 +59,7 @@ class CreateProject extends Component {
             <FormItem
               labelCol={{ span: 5 }}
               wrapperCol={{ span: 12 }}
-              label="Post Description"
+              label="Project Description"
             >
               {getFieldDecorator('projectDescription', {
                 rules: [
@@ -99,6 +104,7 @@ const WrappedCreateProjectForm = withRouter(Form.create()(CreateProject));
 
 CreateProject.propTypes = {
   createProject: PropTypes.func.isRequired,
+  fetchProjects: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   form: PropTypes.object.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
