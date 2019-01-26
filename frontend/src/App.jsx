@@ -40,11 +40,11 @@ class App extends Component {
 
   async componentDidMount() {
     await this.props.fetchUser();
-    this.props.fetchUserProfile();
-    this.setState({ isLoading: false });
     if (!this.props.user.isLoggedIn) {
       return;
     }
+    this.props.fetchUserProfile();
+    this.setState({ isLoading: false });
     this.props.fetchProjects();
     this.props.fetchPosts();
     this.props.fetchProjectCollaborators();
