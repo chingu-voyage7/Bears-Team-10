@@ -1,5 +1,5 @@
 {
-  "name": "bears_10",
+  "name": "collabears",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,7 +11,7 @@
     "build": "cd frontend && npm run build",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend && npm install --prefix backend"
   },
-  "author": "",
+  "author": "Chingu Cohort Nov. 2018 - Bears-Team-10",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^4.1.0"
