@@ -1,6 +1,7 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { Row, Col, Timeline, Card } from 'antd';
 import { connect } from 'react-redux';
 import { fetchProjectCollaborators } from '../../redux/collaborators';
@@ -63,7 +64,7 @@ class Projects extends React.Component {
               {thisProject.length &&
               this.props.user.user.id ===
                 thisProject[0].project_owner_user_id ? (
-                  <WrappedAddCollaborator projectId={projectId} />
+                <WrappedAddCollaborator projectId={projectId} />
               ) : (
                 ''
               )}
@@ -120,7 +121,7 @@ class Projects extends React.Component {
                         {thisProject.length &&
                         this.props.user.user.id ===
                           thisProject[0].project_owner_user_id ? (
-                            <NewPost projectId={projectId} />
+                          <NewPost projectId={projectId} />
                         ) : (
                           [
                             thisProject.length && collaborator.length ? (
@@ -162,7 +163,9 @@ Projects.propTypes = {
   match: PropTypes.object.isRequired,
 };
 
-export default connect(
-  mapStateToProps,
-  { fetchProjectCollaborators }
-)(Projects);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { fetchProjectCollaborators }
+  )(Projects)
+);
