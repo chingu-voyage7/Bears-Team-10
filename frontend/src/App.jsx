@@ -19,7 +19,6 @@ import CommunityProjects from './Components/CommunityProjects/CommunityProjects'
 import CommunityPosts from './Components/CommunityPosts/CommunityPosts';
 import Projects from './Components/CommunityProjects/Projects';
 import Dashboard from './Components/Dashboard/Dashboard';
-import PrivateRoute from './Components/PrivateRoute';
 
 const { Content } = Layout;
 
@@ -36,21 +35,19 @@ const WelcomePage = () => (
   </div>
 );
 class App extends Component {
-  state = { isLoading: true };
-
   async componentDidMount() {
     await this.props.fetchUser();
     if (!this.props.user.isLoggedIn) {
       return;
     }
     this.props.fetchUserProfile();
-    this.setState({ isLoading: false });
     this.props.fetchProjects();
     this.props.fetchPosts();
     this.props.fetchProjectCollaborators();
   }
 
   render() {
+    const { isLoggedIn } = this.props.user;
     return (
       <div>
         <BrowserRouter>
@@ -58,70 +55,44 @@ class App extends Component {
             <Layout className="layout">
               <Header />
               <Content>
-                <Route exact path="/register" component={Register} />
-                <Route exact path="/login" component={Login} />
-                <Switch>
-                  <PrivateRoute
-                    exact
-                    isLoggedIn={this.props.user.isLoggedIn}
-                    isLoading={this.state.isLoading}
-                    path="/create-project"
-                    component={CreateProject}
-                  />
-                  <PrivateRoute
-                    exact
-                    isLoggedIn={this.props.user.isLoggedIn}
-                    isLoading={this.state.isLoading}
-                    path="/new-post"
-                    component={NewPost}
-                  />
-                  <PrivateRoute
-                    exact
-                    isLoggedIn={this.props.user.isLoggedIn}
-                    isLoading={this.state.isLoading}
-                    path="/profile"
-                    component={Profile}
-                  />
-                  <PrivateRoute
-                    exact
-                    isLoggedIn={this.props.user.isLoggedIn}
-                    isLoading={this.state.isLoading}
-                    path="/project/:project_id"
-                    component={Projects}
-                  />
-                  <PrivateRoute
-                    exact
-                    isLoggedIn={this.props.user.isLoggedIn}
-                    isLoading={this.state.isLoading}
-                    path="/community-projects"
-                    component={CommunityProjects}
-                  />
-                  <PrivateRoute
-                    exact
-                    isLoggedIn={this.props.user.isLoggedIn}
-                    isLoading={this.state.isLoading}
-                    path="/community-posts"
-                    component={CommunityPosts}
-                  />
-                  <PrivateRoute
-                    exact
-                    isLoggedIn={this.props.user.isLoggedIn}
-                    isLoading={this.state.isLoading}
-                    path="/user-projects"
-                    component={CommunityProjects}
-                  />
-                  <Route
-                    exact
-                    path="/"
-                    component={() =>
-                      this.props.user.isLoggedIn ? (
-                        <Dashboard />
-                      ) : (
-                        <WelcomePage />
-                      )
-                    }
-                  />
-                </Switch>
+                {!isLoggedIn ? (
+                  <Switch>
+                    <Route exact path="/register" component={Register} />
+                    <Route exact path="/login" component={Login} />
+                    <Route component={WelcomePage} />
+                  </Switch>
+                ) : (
+                  <Switch>
+                    <Route
+                      exact
+                      path="/create-project"
+                      component={CreateProject}
+                    />
+                    <Route exact path="/new-post" component={NewPost} />
+                    <Route exact path="/profile" component={Profile} />
+                    <Route
+                      exact
+                      path="/project/:project_id"
+                      component={Projects}
+                    />
+                    <Route
+                      exact
+                      path="/community-projects"
+                      component={CommunityProjects}
+                    />
+                    <Route
+                      exact
+                      path="/community-posts"
+                      component={CommunityPosts}
+                    />
+                    <Route
+                      exact
+                      path="/user-projects"
+                      component={CommunityProjects}
+                    />
+                    <Route exact path="/" component={Dashboard} />
+                  </Switch>
+                )}
               </Content>
             </Layout>
           </div>
