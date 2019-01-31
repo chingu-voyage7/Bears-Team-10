@@ -1,15 +1,24 @@
 # Bears-Team-10
-Add-project-description-here | Voyage-7 | https://chingu.io/
+ Live: https://collabears.herokuapp.com/
 
-We have a backend and a frontend with an overarching project to run them concurrently.
+### Goal of Project
+ This app will create a platform where people can post about projects they are trying to find collaborators to help with, or offer to collaborate on other peoples projects as well.
 
-During development, we can just run `npm start` from our main project directory to start up both the backend and frontend development servers. When we want to deploy to production we can use `npm run build` to compile the frontend and be served by our backend with its API
+### UI Examples
+https://xd.adobe.com/view/9f50c967-d757-4670-4b2b-ea3937ddc87a-e961/
+
+### What Stack, Where?
+  1. Using Create React App, we have separated the backend and the front end for dev purposes
+  2. ./backend: Koa and Postgres
+  3. ./frontend: React, Redux
+  
+During development, we can just run `npm run dev` from our main project directory to start up both the backend and frontend development servers. When we want to deploy to production we can use `npm run build` to compile the frontend and be served by our backend with its API
 
 ### Contribting: 
-  1. Clone repo
+  1. Fork and Clone repo
   2. Install packages: `npm install`
   3. You can run the entire app, or run the individual front or backends:
-       - `npm run start`
+       - `npm run dev`
   4. Always be up to date: `git pull origin master` , or  `git pull origin develop`
 
   ### Your first pull request
