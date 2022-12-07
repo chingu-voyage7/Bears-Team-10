@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "husky": "^1.2.1",
-    "lint-staged": "^8.1.0",
+    "lint-staged": "^13.1.0",
     "nodemon": "^1.18.9",
     "prettier": "^1.15.3"
   }
